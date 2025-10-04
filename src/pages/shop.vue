@@ -58,7 +58,7 @@
             </div>
 
             <!-- 传承人筛选 -->
-            <div class="filter-section">
+            <!-- <div class="filter-section">
               <h3 class="filter-title">传承人</h3>
               <ul class="filter-list">
                 <li class="filter-item" @click="selectInheritor('all')"
@@ -70,7 +70,7 @@
                   {{ inheritor.name }}
                 </li>
               </ul>
-            </div>
+            </div> -->
 
             <!-- 热门标签 -->
             <div class="filter-section">
@@ -131,7 +131,7 @@
                   <div class="product-price">
                     <span class="price">¥{{ product.price.toFixed(2) }}</span>
                     <span v-if="product.originalPrice" class="original-price">¥{{ product.originalPrice.toFixed(2)
-                      }}</span>
+                    }}</span>
                   </div>
                   <div class="product-actions">
                     <button class="add-to-cart-btn" @click="addToCart(product)">
@@ -297,7 +297,7 @@ const selectedInheritor = ref<string | number>('all');
 const selectedTags = ref<string[]>([]);
 
 // 价格范围
-const priceRange = ref<{min: string | number, max: string | number}>({
+const priceRange = ref<{ min: string | number, max: string | number }>({
   min: '',
   max: ''
 });
