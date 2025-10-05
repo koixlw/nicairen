@@ -1,10 +1,15 @@
+name: Build
 on: push
 
 jobs:
   npm-build:
+    name: npm-build 工作
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: 读取仓库内容
+        uses: actions/checkout@v4
+      
       - run: pnpm install
       - run: pnpm build
 
