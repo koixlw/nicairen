@@ -7,10 +7,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 读取仓库内容
+      - name: Checkout 代码
         uses: actions/checkout@v4
-      
-      - run: pnpm install
-      - run: pnpm build
 
-   
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # 推荐指定明确的 Node.js 版本
+          cache: 'pnpm'       # 启用 pnpm 缓存，加快安装速度
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build project
+        run: pnpm build
