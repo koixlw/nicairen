@@ -16,11 +16,8 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
-      - name: Install pnpm
-        uses: pnpm/action-pnpm@v2
-        with:
-          # pnpm version is optional, e.g., 8.x or 9.x
-          version: 9.x
+      - name: Setup pnpm
+        uses: pnpm/action-setup-pnpm@v3  # ✅ 正确的仓库名
 
       - name: Install dependencies
         run: pnpm install
