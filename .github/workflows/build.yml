@@ -8,13 +8,7 @@ jobs:
 
     steps:
       - name: Checkout 代码
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
+        uses: actions/checkout@v5
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -22,10 +16,9 @@ jobs:
           version: 10
 
       - name: Install dependencies
-        run: pnpm install
-
-      - name: Build project
-        run: pnpm build
+        run: |
+          pnpm install
+          pnpm build
 
       - name: 部署
         uses: JamesIves/github-pages-deploy-action@v4
