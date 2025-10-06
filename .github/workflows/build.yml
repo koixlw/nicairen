@@ -1,6 +1,9 @@
 name: Build
 on: push
 
+permissions:
+  contents: write
+
 jobs:
   npm-build:
     name: npm-build 工作
@@ -23,7 +26,9 @@ jobs:
       - name: 部署
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          github_token: ${{ secrets.DEPLOY_TOKEN }} 
           branch: gh-pages # The branch the action should deploy to.
           folder: dist # The folder the action should deploy.
           clean: true
+
         
