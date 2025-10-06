@@ -36,8 +36,13 @@
           <div class="filter-group search-group">
             <label class="filter-label">搜索作品</label>
             <div class="search-box">
-              <input type="text" v-model="searchKeyword" placeholder="输入作品名称或关键词" class="search-input"
-                @input="handleSearch">
+              <input
+                type="text"
+                v-model="searchKeyword"
+                placeholder="输入作品名称或关键词"
+                class="search-input"
+                @input="handleSearch"
+              />
               <button class="search-btn" @click="filterWorks">
                 <i class="icon-search"></i>
               </button>
@@ -59,7 +64,7 @@
         <div class="gallery-grid">
           <div class="work-card" v-for="work in paginatedWorks" :key="work.id">
             <div class="card-img-container">
-              <img :src="work.image" :alt="work.title" class="work-img">
+              <img :src="work.image" :alt="work.title" class="work-img" />
               <div class="card-overlay">
                 <div class="overlay-content">
                   <h3 class="overlay-title">{{ work.title }}</h3>
@@ -101,13 +106,15 @@
           <button class="page-btn" @click="currentPage--" :disabled="currentPage === 1">
             上一页
           </button>
-          <span class="page-info">
-            第 {{ currentPage }} / {{ totalPages }} 页
-          </span>
+          <span class="page-info"> 第 {{ currentPage }} / {{ totalPages }} 页 </span>
           <button class="page-btn" @click="currentPage++" :disabled="currentPage === totalPages">
             下一页
           </button>
-          <button class="page-btn" @click="currentPage = totalPages" :disabled="currentPage === totalPages">
+          <button
+            class="page-btn"
+            @click="currentPage = totalPages"
+            :disabled="currentPage === totalPages"
+          >
             末页
           </button>
           <div class="page-size">
@@ -127,39 +134,39 @@
 <script lang="ts" setup>
 // 定义组件名称以符合多词规范
 defineOptions({
-  name: 'GalleryPage'
-});
+  name: 'GalleryPage',
+})
 
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue'
 
 // 导入作品图片
-import work1Img from '@/assets/images/works/work1.jpg';
-import work2Img from '@/assets/images/works/work2.jpg';
-import work3Img from '@/assets/images/works/work3.jpg';
-import work4Img from '@/assets/images/works/work4.jpg';
-import work5Img from '@/assets/images/works/work5.jpg';
-import work6Img from '@/assets/images/works/work6.jpg';
-import work7Img from '@/assets/images/works/work7.jpg';
-import work8Img from '@/assets/images/works/work8.jpg';
-import work9Img from '@/assets/images/works/work9.jpg';
-import work10Img from '@/assets/images/works/work10.jpg';
-import work11Img from '@/assets/images/works/work11.jpg';
-import work12Img from '@/assets/images/works/work12.jpg';
-import work13Img from '@/assets/images/works/work13.jpg';
-import work14Img from '@/assets/images/works/work14.jpg';
-import work15Img from '@/assets/images/works/work15.jpg';
-import work16Img from '@/assets/images/works/work16.jpg';
-import work17Img from '@/assets/images/works/work16.jpg';
-import work18Img from '@/assets/images/works/work16.jpg';
+import work1Img from '@/assets/images/works/work1.jpg'
+import work2Img from '@/assets/images/works/work2.jpg'
+import work3Img from '@/assets/images/works/work3.jpg'
+import work4Img from '@/assets/images/works/work4.jpg'
+import work5Img from '@/assets/images/works/work5.jpg'
+import work6Img from '@/assets/images/works/work6.jpg'
+import work7Img from '@/assets/images/works/work7.jpg'
+import work8Img from '@/assets/images/works/work8.jpg'
+import work9Img from '@/assets/images/works/work9.jpg'
+import work10Img from '@/assets/images/works/work10.jpg'
+import work11Img from '@/assets/images/works/work11.jpg'
+import work12Img from '@/assets/images/works/work12.jpg'
+import work13Img from '@/assets/images/works/work13.jpg'
+import work14Img from '@/assets/images/works/work14.jpg'
+import work15Img from '@/assets/images/works/work15.jpg'
+import work16Img from '@/assets/images/works/work16.jpg'
+import work17Img from '@/assets/images/works/work16.jpg'
+import work18Img from '@/assets/images/works/work16.jpg'
 
 // 筛选条件
-const selectedCategory = ref('all');
-const selectedStyle = ref('all');
-const searchKeyword = ref('');
+const selectedCategory = ref('all')
+const selectedStyle = ref('all')
+const searchKeyword = ref('')
 
 // 分页相关
-const currentPage = ref(1);
-const pageSize = ref(9);
+const currentPage = ref(1)
+const pageSize = ref(9)
 
 // 模拟作品数据
 const allWorks = ref([
@@ -173,7 +180,7 @@ const allWorks = ref([
     artist: '张明山',
     year: '2018',
     isLiked: false,
-    likes: 156
+    likes: 156,
   },
   {
     id: 2,
@@ -185,7 +192,7 @@ const allWorks = ref([
     artist: '李巧云',
     year: '2019',
     isLiked: true,
-    likes: 234
+    likes: 234,
   },
   {
     id: 3,
@@ -197,7 +204,7 @@ const allWorks = ref([
     artist: '王建国',
     year: '2020',
     isLiked: false,
-    likes: 189
+    likes: 189,
   },
   {
     id: 4,
@@ -209,7 +216,7 @@ const allWorks = ref([
     artist: '陈秀英',
     year: '2017',
     isLiked: false,
-    likes: 143
+    likes: 143,
   },
   {
     id: 5,
@@ -221,7 +228,7 @@ const allWorks = ref([
     artist: '刘志强',
     year: '2021',
     isLiked: true,
-    likes: 302
+    likes: 302,
   },
   {
     id: 6,
@@ -233,7 +240,7 @@ const allWorks = ref([
     artist: '周红梅',
     year: '2019',
     isLiked: false,
-    likes: 276
+    likes: 276,
   },
   {
     id: 7,
@@ -245,7 +252,7 @@ const allWorks = ref([
     artist: '黄天明',
     year: '2018',
     isLiked: false,
-    likes: 168
+    likes: 168,
   },
   {
     id: 8,
@@ -257,7 +264,7 @@ const allWorks = ref([
     artist: '赵丽华',
     year: '2022',
     isLiked: true,
-    likes: 221
+    likes: 221,
   },
   {
     id: 9,
@@ -269,7 +276,7 @@ const allWorks = ref([
     artist: '吴文化',
     year: '2020',
     isLiked: false,
-    likes: 298
+    likes: 298,
   },
   {
     id: 10,
@@ -281,7 +288,7 @@ const allWorks = ref([
     artist: '郑小云',
     year: '2017',
     isLiked: false,
-    likes: 245
+    likes: 245,
   },
   {
     id: 11,
@@ -293,7 +300,7 @@ const allWorks = ref([
     artist: '马小明',
     year: '2021',
     isLiked: true,
-    likes: 187
+    likes: 187,
   },
   {
     id: 12,
@@ -305,7 +312,7 @@ const allWorks = ref([
     artist: '孙丽娟',
     year: '2019',
     isLiked: false,
-    likes: 203
+    likes: 203,
   },
   {
     id: 13,
@@ -317,7 +324,7 @@ const allWorks = ref([
     artist: '张明山',
     year: '2018',
     isLiked: false,
-    likes: 176
+    likes: 176,
   },
   {
     id: 14,
@@ -329,7 +336,7 @@ const allWorks = ref([
     artist: '李巧云',
     year: '2020',
     isLiked: true,
-    likes: 267
+    likes: 267,
   },
   {
     id: 15,
@@ -341,7 +348,7 @@ const allWorks = ref([
     artist: '王建国',
     year: '2022',
     isLiked: false,
-    likes: 198
+    likes: 198,
   },
   {
     id: 16,
@@ -353,7 +360,7 @@ const allWorks = ref([
     artist: '陈秀英',
     year: '2017',
     isLiked: false,
-    likes: 231
+    likes: 231,
   },
   {
     id: 17,
@@ -365,7 +372,7 @@ const allWorks = ref([
     artist: '刘志强',
     year: '2021',
     isLiked: true,
-    likes: 287
+    likes: 287,
   },
   {
     id: 18,
@@ -377,98 +384,99 @@ const allWorks = ref([
     artist: '周红梅',
     year: '2019',
     isLiked: false,
-    likes: 254
-  }
-]);
+    likes: 254,
+  },
+])
 
 // 筛选后的作品列表
 const filteredWorks = computed(() => {
-  let result = allWorks.value;
+  let result = allWorks.value
 
   // 按分类筛选
   if (selectedCategory.value !== 'all') {
-    result = result.filter(work => work.category === selectedCategory.value);
+    result = result.filter((work) => work.category === selectedCategory.value)
   }
 
   // 按风格筛选
   if (selectedStyle.value !== 'all') {
-    result = result.filter(work => work.style === selectedStyle.value);
+    result = result.filter((work) => work.style === selectedStyle.value)
   }
 
   // 按关键词搜索
   if (searchKeyword.value.trim()) {
-    const keyword = searchKeyword.value.trim().toLowerCase();
-    result = result.filter(work =>
-      work.title.toLowerCase().includes(keyword) ||
-      work.description.toLowerCase().includes(keyword) ||
-      work.artist.toLowerCase().includes(keyword)
-    );
+    const keyword = searchKeyword.value.trim().toLowerCase()
+    result = result.filter(
+      (work) =>
+        work.title.toLowerCase().includes(keyword) ||
+        work.description.toLowerCase().includes(keyword) ||
+        work.artist.toLowerCase().includes(keyword),
+    )
   }
 
-  return result;
-});
+  return result
+})
 
 // 总页数
 const totalPages = computed(() => {
-  return Math.ceil(filteredWorks.value.length / pageSize.value);
-});
+  return Math.ceil(filteredWorks.value.length / pageSize.value)
+})
 
 // 当前页显示的作品
 const paginatedWorks = computed(() => {
-  const startIndex = (currentPage.value - 1) * pageSize.value;
-  const endIndex = startIndex + pageSize.value;
-  return filteredWorks.value.slice(startIndex, endIndex);
-});
+  const startIndex = (currentPage.value - 1) * pageSize.value
+  const endIndex = startIndex + pageSize.value
+  return filteredWorks.value.slice(startIndex, endIndex)
+})
 
 // 获取分类文本
 const getCategoryText = (category: string) => {
   const categoryMap: Record<string, string> = {
-    'figure': '人物类',
-    'animal': '动物类',
-    'legend': '神话传说',
-    'folk': '民俗风情',
-    'modern': '现代创意'
-  };
-  return categoryMap[category] || '';
-};
+    figure: '人物类',
+    animal: '动物类',
+    legend: '神话传说',
+    folk: '民俗风情',
+    modern: '现代创意',
+  }
+  return categoryMap[category] || ''
+}
 
 // 切换点赞状态
 const toggleLike = (id: number) => {
-  const work = allWorks.value.find(w => w.id === id);
+  const work = allWorks.value.find((w) => w.id === id)
   if (work) {
-    work.isLiked = !work.isLiked;
-    work.likes += work.isLiked ? 1 : -1;
+    work.isLiked = !work.isLiked
+    work.likes += work.isLiked ? 1 : -1
   }
-};
+}
 
 // 筛选作品
 const filterWorks = () => {
-  currentPage.value = 1; // 重置到第一页
-};
+  currentPage.value = 1 // 重置到第一页
+}
 
 // 处理搜索
 const handleSearch = () => {
   // 可以在这里添加防抖逻辑
-  currentPage.value = 1; // 重置到第一页
-};
+  currentPage.value = 1 // 重置到第一页
+}
 
 // 页码大小改变
 const onPageSizeChange = () => {
-  currentPage.value = 1; // 重置到第一页
-};
+  currentPage.value = 1 // 重置到第一页
+}
 
 // 重置筛选条件
 const resetFilters = () => {
-  selectedCategory.value = 'all';
-  selectedStyle.value = 'all';
-  searchKeyword.value = '';
-  currentPage.value = 1;
-};
+  selectedCategory.value = 'all'
+  selectedStyle.value = 'all'
+  searchKeyword.value = ''
+  currentPage.value = 1
+}
 
 // 组件挂载后初始化
 onMounted(() => {
   // 可以在这里添加数据加载逻辑
-});
+})
 </script>
 
 <style scoped>
@@ -611,7 +619,9 @@ section {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .work-card:hover {

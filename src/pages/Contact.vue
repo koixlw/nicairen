@@ -74,7 +74,7 @@
           <div class="map-container" id="map">
             <!-- 这里会嵌入地图，实际项目中可以使用百度地图、高德地图等API -->
             <div class="map-placeholder">
-              <img :src="mapPlaceholderImg" alt="泥彩人艺术馆地图" class="map-image">
+              <img :src="mapPlaceholderImg" alt="泥彩人艺术馆地图" class="map-image" />
               <div class="map-marker">
                 <i class="icon-map-marker"></i>
               </div>
@@ -99,7 +99,7 @@
                   class="form-input"
                   placeholder="请输入您的姓名"
                   required
-                >
+                />
                 <div class="error-message" v-if="errors.name">{{ errors.name }}</div>
               </div>
 
@@ -113,7 +113,7 @@
                   class="form-input"
                   placeholder="请输入您的邮箱"
                   required
-                >
+                />
                 <div class="error-message" v-if="errors.email">{{ errors.email }}</div>
               </div>
 
@@ -126,19 +126,14 @@
                   v-model="formData.phone"
                   class="form-input"
                   placeholder="请输入您的联系电话"
-                >
+                />
                 <div class="error-message" v-if="errors.phone">{{ errors.phone }}</div>
               </div>
 
               <!-- 主题 -->
               <div class="form-group">
                 <label for="subject" class="form-label">主题 <span class="required">*</span></label>
-                <select
-                  id="subject"
-                  v-model="formData.subject"
-                  class="form-select"
-                  required
-                >
+                <select id="subject" v-model="formData.subject" class="form-select" required>
                   <option value="">请选择留言主题</option>
                   <option value="visit">参观咨询</option>
                   <option value="cooperation">合作洽谈</option>
@@ -151,7 +146,9 @@
 
               <!-- 留言内容 -->
               <div class="form-group">
-                <label for="message" class="form-label">留言内容 <span class="required">*</span></label>
+                <label for="message" class="form-label"
+                  >留言内容 <span class="required">*</span></label
+                >
                 <textarea
                   id="message"
                   v-model="formData.message"
@@ -166,7 +163,9 @@
 
               <!-- 验证码 -->
               <div class="form-group captcha-group">
-                <label for="captcha" class="form-label">验证码 <span class="required">*</span></label>
+                <label for="captcha" class="form-label"
+                  >验证码 <span class="required">*</span></label
+                >
                 <div class="captcha-wrapper">
                   <input
                     type="text"
@@ -175,7 +174,7 @@
                     class="form-input captcha-input"
                     placeholder="请输入验证码"
                     required
-                  >
+                  />
                   <div class="captcha-image" @click="refreshCaptcha">
                     {{ captchaText }}
                   </div>
@@ -186,9 +185,7 @@
               <!-- 提交按钮 -->
               <div class="form-group">
                 <button type="submit" class="submit-btn" :disabled="submitting">
-                  <span v-if="submitting">
-                    <i class="icon-spinner icon-spin"></i> 提交中...
-                  </span>
+                  <span v-if="submitting"> <i class="icon-spinner icon-spin"></i> 提交中... </span>
                   <span v-else>提交留言</span>
                 </button>
               </div>
@@ -222,11 +219,15 @@
         <h2 class="section-title">关注我们</h2>
         <p class="section-subtitle">通过社交媒体了解更多泥彩人非遗文化</p>
         <div class="social-icons">
-          <a href="#" class="social-icon social-weixin" @click.stop="showWeixinCode = !showWeixinCode">
+          <a
+            href="#"
+            class="social-icon social-weixin"
+            @click.stop="showWeixinCode = !showWeixinCode"
+          >
             <i class="icon-weixin"></i>
             <span>微信公众号</span>
             <div class="weixin-code-popover" v-if="showWeixinCode">
-              <img :src="weixinOfficialImg" alt="微信公众号">
+              <img :src="weixinOfficialImg" alt="微信公众号" />
               <p>扫码关注获取更多资讯</p>
             </div>
           </a>
@@ -260,16 +261,16 @@
 <script lang="ts" setup>
 // 定义组件名称以符合多词规范
 defineOptions({
-  name: 'ContactPage'
-});
+  name: 'ContactPage',
+})
 
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 // 移除未使用的computed导入
 // import { computed } from 'vue';
 
 // 导入图片资源
-import mapPlaceholderImg from '@/assets/images/map-placeholder.jpg';
-import weixinOfficialImg from '@/assets/images/weixin-official.png';
+import mapPlaceholderImg from '@/assets/images/map-placeholder.jpg'
+import weixinOfficialImg from '@/assets/images/weixin-official.png'
 
 // 表单数据
 const formData = ref({
@@ -278,146 +279,152 @@ const formData = ref({
   phone: '',
   subject: '',
   message: '',
-  captcha: ''
-});
+  captcha: '',
+})
 
 // 表单验证错误
 const errors = ref<{
-  name?: string;
-  email?: string;
-  phone?: string;
-  subject?: string;
-  message?: string;
-  captcha?: string;
-}>({});
+  name?: string
+  email?: string
+  phone?: string
+  subject?: string
+  message?: string
+  captcha?: string
+}>({})
 
 // 表单提交状态
-const submitting = ref(false);
+const submitting = ref(false)
 
 // 显示返回顶部按钮
-const showBackToTop = ref(false);
+const showBackToTop = ref(false)
 
 // 显示微信二维码
-const showWeixinCode = ref(false);
+const showWeixinCode = ref(false)
 
 // 验证码文本
-const captchaText = ref('');
+const captchaText = ref('')
 
 // 常见问题数据
 const faqs = ref([
   {
     question: '如何参观泥彩人艺术馆？',
-    answer: '泥彩人艺术馆位于江苏省南京市秦淮区夫子庙景区内，您可以乘坐地铁1号线至三山街站下车，步行约10分钟即可到达。也可以乘坐公交1路、4路、7路等线路至夫子庙站下车。艺术馆开放时间为周一至周五9:00-18:00，周六至周日10:00-20:00，节假日10:00-21:00。',
-    open: false
+    answer:
+      '泥彩人艺术馆位于江苏省南京市秦淮区夫子庙景区内，您可以乘坐地铁1号线至三山街站下车，步行约10分钟即可到达。也可以乘坐公交1路、4路、7路等线路至夫子庙站下车。艺术馆开放时间为周一至周五9:00-18:00，周六至周日10:00-20:00，节假日10:00-21:00。',
+    open: false,
   },
   {
     question: '参观泥彩人艺术馆需要门票吗？',
-    answer: '是的，泥彩人艺术馆需要购买门票。成人票为60元/人，学生票（凭学生证）为30元/人，65岁以上老人（凭身份证）、残疾人（凭残疾证）、1.2米以下儿童免票。团体票（20人以上）可享受9折优惠。您可以在艺术馆现场购票，也可以通过我们的官方网站或合作平台提前购票。',
-    open: false
+    answer:
+      '是的，泥彩人艺术馆需要购买门票。成人票为60元/人，学生票（凭学生证）为30元/人，65岁以上老人（凭身份证）、残疾人（凭残疾证）、1.2米以下儿童免票。团体票（20人以上）可享受9折优惠。您可以在艺术馆现场购票，也可以通过我们的官方网站或合作平台提前购票。',
+    open: false,
   },
   {
     question: '如何报名参加泥彩人制作体验活动？',
-    answer: '您可以通过以下方式报名参加泥彩人制作体验活动：1. 拨打我们的客服电话025-12345678进行预约；2. 发送邮件至contact@nicairen.com进行预约；3. 在我们的官方网站或微信公众号上在线预约。体验活动需要提前3天预约，每次活动时长约1.5小时，费用为80元/人（含材料和指导费）。',
-    open: false
+    answer:
+      '您可以通过以下方式报名参加泥彩人制作体验活动：1. 拨打我们的客服电话025-12345678进行预约；2. 发送邮件至contact@nicairen.com进行预约；3. 在我们的官方网站或微信公众号上在线预约。体验活动需要提前3天预约，每次活动时长约1.5小时，费用为80元/人（含材料和指导费）。',
+    open: false,
   },
   {
     question: '如何成为泥彩人的传承人？',
-    answer: '成为泥彩人的传承人需要经过系统的学习和实践。我们提供不同级别的传承培训课程，包括基础班、进阶班和大师班。您可以通过我们的官方渠道了解最新的培训信息并报名参加。另外，我们也欢迎有相关艺术背景和兴趣的人士加入我们的传承团队，共同推动泥彩人技艺的传承和发展。',
-    open: false
+    answer:
+      '成为泥彩人的传承人需要经过系统的学习和实践。我们提供不同级别的传承培训课程，包括基础班、进阶班和大师班。您可以通过我们的官方渠道了解最新的培训信息并报名参加。另外，我们也欢迎有相关艺术背景和兴趣的人士加入我们的传承团队，共同推动泥彩人技艺的传承和发展。',
+    open: false,
   },
   {
     question: '泥彩人作品可以定制吗？',
-    answer: '是的，我们提供泥彩人作品的定制服务。您可以根据自己的需求定制各种题材、尺寸和风格的泥彩人作品。定制流程包括：1. 联系我们提供定制需求和参考图片；2. 我们的设计师根据您的需求进行设计并报价；3. 确认设计和价格后支付定金；4. 制作完成后验收并支付尾款。定制周期根据作品的复杂程度而定，一般为1-4周。',
-    open: false
+    answer:
+      '是的，我们提供泥彩人作品的定制服务。您可以根据自己的需求定制各种题材、尺寸和风格的泥彩人作品。定制流程包括：1. 联系我们提供定制需求和参考图片；2. 我们的设计师根据您的需求进行设计并报价；3. 确认设计和价格后支付定金；4. 制作完成后验收并支付尾款。定制周期根据作品的复杂程度而定，一般为1-4周。',
+    open: false,
   },
   {
     question: '如何与泥彩人艺术馆进行合作？',
-    answer: '我们欢迎各类机构和个人与我们进行合作，包括但不限于：文化活动策划、展览展示、文创产品开发、教育培训、媒体合作等。如果您有合作意向，请通过电话025-12345678或邮件contact@nicairen.com与我们联系，我们的工作人员会尽快回复您并安排进一步的洽谈。',
-    open: false
-  }
-]);
+    answer:
+      '我们欢迎各类机构和个人与我们进行合作，包括但不限于：文化活动策划、展览展示、文创产品开发、教育培训、媒体合作等。如果您有合作意向，请通过电话025-12345678或邮件contact@nicairen.com与我们联系，我们的工作人员会尽快回复您并安排进一步的洽谈。',
+    open: false,
+  },
+])
 
 // 生成验证码
 const generateCaptcha = () => {
-  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let result = '';
+  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let result = ''
   for (let i = 0; i < 4; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
   }
-  return result;
-};
+  return result
+}
 
 // 刷新验证码
 const refreshCaptcha = () => {
-  captchaText.value = generateCaptcha();
-};
+  captchaText.value = generateCaptcha()
+}
 
 // 表单验证
 const validateForm = () => {
-  let isValid = true;
-  errors.value = {};
+  let isValid = true
+  errors.value = {}
 
   // 验证姓名
   if (!formData.value.name.trim()) {
-    errors.value.name = '请输入您的姓名';
-    isValid = false;
+    errors.value.name = '请输入您的姓名'
+    isValid = false
   }
 
   // 验证邮箱
   if (!formData.value.email.trim()) {
-    errors.value.email = '请输入您的邮箱';
-    isValid = false;
+    errors.value.email = '请输入您的邮箱'
+    isValid = false
   } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(formData.value.email)) {
-    errors.value.email = '请输入有效的邮箱地址';
-    isValid = false;
+    errors.value.email = '请输入有效的邮箱地址'
+    isValid = false
   }
 
   // 验证电话
   if (formData.value.phone.trim() && !/^1[3-9]\d{9}$/.test(formData.value.phone.trim())) {
-    errors.value.phone = '请输入有效的手机号码';
-    isValid = false;
+    errors.value.phone = '请输入有效的手机号码'
+    isValid = false
   }
 
   // 验证主题
   if (!formData.value.subject) {
-    errors.value.subject = '请选择留言主题';
-    isValid = false;
+    errors.value.subject = '请选择留言主题'
+    isValid = false
   }
 
   // 验证留言内容
   if (!formData.value.message.trim()) {
-    errors.value.message = '请输入留言内容';
-    isValid = false;
+    errors.value.message = '请输入留言内容'
+    isValid = false
   } else if (formData.value.message.length > 500) {
-    errors.value.message = '留言内容不能超过500个字符';
-    isValid = false;
+    errors.value.message = '留言内容不能超过500个字符'
+    isValid = false
   }
 
   // 验证验证码
   if (!formData.value.captcha.trim()) {
-    errors.value.captcha = '请输入验证码';
-    isValid = false;
+    errors.value.captcha = '请输入验证码'
+    isValid = false
   } else if (formData.value.captcha.toUpperCase() !== captchaText.value) {
-    errors.value.captcha = '验证码错误';
-    isValid = false;
+    errors.value.captcha = '验证码错误'
+    isValid = false
   }
 
-  return isValid;
-};
+  return isValid
+}
 
 // 提交表单
 const submitForm = () => {
   if (!validateForm()) {
-    return;
+    return
   }
 
-  submitting.value = true;
+  submitting.value = true
 
   // 模拟API请求
   setTimeout(() => {
-    submitting.value = false;
-    alert('留言提交成功！我们会尽快与您联系。');
-    
+    submitting.value = false
+    alert('留言提交成功！我们会尽快与您联系。')
+
     // 重置表单
     formData.value = {
       name: '',
@@ -425,74 +432,79 @@ const submitForm = () => {
       phone: '',
       subject: '',
       message: '',
-      captcha: ''
-    };
-    
+      captcha: '',
+    }
+
     // 刷新验证码
-    refreshCaptcha();
-  }, 1500);
-};
+    refreshCaptcha()
+  }, 1500)
+}
 
 // 切换FAQ展开状态
 const toggleFaq = (index: number) => {
   if (faqs.value[index]) {
-    faqs.value[index].open = !faqs.value[index].open;
+    faqs.value[index].open = !faqs.value[index].open
   }
-};
+}
 
 // 滚动到地图位置
 const scrollToMap = () => {
-  const mapElement = document.getElementById('map');
+  const mapElement = document.getElementById('map')
   if (mapElement) {
-    mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
-};
+}
 
 // 返回顶部
 const backToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
 
 // 监听滚动事件
 const handleScroll = () => {
-  showBackToTop.value = window.scrollY > 300;
-};
+  showBackToTop.value = window.scrollY > 300
+}
 
 // 监听点击事件，关闭微信二维码
 const handleClickOutside = (event: Event) => {
-  const socialIcons = document.querySelector('.social-icons');
-  const weixinIcon = document.querySelector('.social-weixin');
-  
-  if (socialIcons && weixinIcon && !socialIcons.contains(event.target as Node) && showWeixinCode.value) {
-    showWeixinCode.value = false;
+  const socialIcons = document.querySelector('.social-icons')
+  const weixinIcon = document.querySelector('.social-weixin')
+
+  if (
+    socialIcons &&
+    weixinIcon &&
+    !socialIcons.contains(event.target as Node) &&
+    showWeixinCode.value
+  ) {
+    showWeixinCode.value = false
   }
-};
+}
 
 // 组件挂载时初始化
 onMounted(() => {
   // 生成初始验证码
-  refreshCaptcha();
-  
+  refreshCaptcha()
+
   // 监听滚动事件
-  window.addEventListener('scroll', handleScroll);
-  
+  window.addEventListener('scroll', handleScroll)
+
   // 监听点击事件
-  document.addEventListener('click', handleClickOutside);
-  
+  document.addEventListener('click', handleClickOutside)
+
   // 模拟加载地图
   setTimeout(() => {
-    const mapLoading = document.querySelector('.map-loading') as HTMLElement;
+    const mapLoading = document.querySelector('.map-loading') as HTMLElement
     if (mapLoading) {
-      mapLoading.style.display = 'none';
+      mapLoading.style.display = 'none'
     }
-  }, 1500);
-});
+  }, 1500)
+})
 
 // 组件卸载时清理
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-  document.removeEventListener('click', handleClickOutside);
-});
+  window.removeEventListener('scroll', handleScroll)
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <style scoped>
@@ -694,8 +706,12 @@ section {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .contact-form-container {
@@ -948,13 +964,13 @@ section {
 }
 
 .social-weixin:hover {
-  border-color: #07C160;
-  color: #07C160;
+  border-color: #07c160;
+  color: #07c160;
 }
 
 .social-weibo:hover {
-  border-color: #E6162D;
-  color: #E6162D;
+  border-color: #e6162d;
+  color: #e6162d;
 }
 
 .social-douyin:hover {
@@ -963,13 +979,13 @@ section {
 }
 
 .social-youtube:hover {
-  border-color: #FF0000;
-  color: #FF0000;
+  border-color: #ff0000;
+  color: #ff0000;
 }
 
 .social-instagram:hover {
-  border-color: #E1306C;
-  color: #E1306C;
+  border-color: #e1306c;
+  color: #e1306c;
 }
 
 .weixin-code-popover {
@@ -1030,19 +1046,19 @@ section {
   .page-title {
     font-size: 40px;
   }
-  
+
   .section-title {
     font-size: 32px;
   }
-  
+
   .map-form-wrapper {
     gap: 30px;
   }
-  
+
   .contact-form-container {
     flex: 0 0 450px;
   }
-  
+
   .info-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1052,55 +1068,55 @@ section {
   .page-header {
     padding: 60px 0;
   }
-  
+
   .page-title {
     font-size: 32px;
   }
-  
+
   .page-subtitle {
     font-size: 18px;
   }
-  
+
   section {
     padding: 40px 0;
   }
-  
+
   .section-title {
     font-size: 28px;
   }
-  
+
   .section-subtitle {
     font-size: 16px;
   }
-  
+
   .map-form-wrapper {
     flex-direction: column;
     gap: 30px;
   }
-  
+
   .map-container {
     height: 400px;
   }
-  
+
   .contact-form-container {
     flex: 1;
     padding: 30px;
   }
-  
+
   .form-title {
     font-size: 24px;
   }
-  
+
   .info-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .social-icons {
     flex-direction: column;
     align-items: center;
     gap: 15px;
   }
-  
+
   .social-icon {
     width: 280px;
     justify-content: center;
@@ -1111,71 +1127,71 @@ section {
   .page-title {
     font-size: 28px;
   }
-  
+
   .page-subtitle {
     font-size: 16px;
   }
-  
+
   .section-title {
     font-size: 24px;
   }
-  
+
   .section-subtitle {
     font-size: 14px;
   }
-  
+
   .info-card {
     padding: 20px;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
-  
+
   .info-icon {
     flex: 0 0 50px;
     height: 50px;
     font-size: 20px;
     margin-bottom: 15px;
   }
-  
+
   .contact-form-container {
     padding: 20px;
   }
-  
+
   .form-input,
   .form-select,
   .form-textarea {
     font-size: 14px;
   }
-  
+
   .captcha-wrapper {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .captcha-image {
     flex: 0 0 auto;
     width: 100%;
   }
-  
+
   .submit-btn {
     font-size: 16px;
   }
-  
+
   .faq-question {
     padding: 15px;
     gap: 10px;
   }
-  
+
   .faq-text {
     font-size: 14px;
   }
-  
+
   .faq-answer {
     padding: 15px;
     font-size: 14px;
   }
-  
+
   .back-to-top {
     bottom: 20px;
     right: 20px;

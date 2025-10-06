@@ -21,23 +21,40 @@
                 <label class="form-label">预约类型 <span class="required">*</span></label>
                 <div class="radio-group">
                   <label class="radio-label">
-                    <input type="radio" value="individual" v-model="formData.reservationType"
-                      @change="onReservationTypeChange">
+                    <input
+                      type="radio"
+                      value="individual"
+                      v-model="formData.reservationType"
+                      @change="onReservationTypeChange"
+                    />
                     <span>个人预约</span>
                   </label>
                   <label class="radio-label">
-                    <input type="radio" value="group" v-model="formData.reservationType"
-                      @change="onReservationTypeChange">
+                    <input
+                      type="radio"
+                      value="group"
+                      v-model="formData.reservationType"
+                      @change="onReservationTypeChange"
+                    />
                     <span>团体预约</span>
                   </label>
                 </div>
-                <div class="error-message" v-if="errors.reservationType">{{ errors.reservationType }}</div>
+                <div class="error-message" v-if="errors.reservationType">
+                  {{ errors.reservationType }}
+                </div>
               </div>
 
               <!-- 活动类型 -->
               <div class="form-group">
-                <label for="activityType" class="form-label">活动类型 <span class="required">*</span></label>
-                <select id="activityType" v-model="formData.activityType" class="form-select" required>
+                <label for="activityType" class="form-label"
+                  >活动类型 <span class="required">*</span></label
+                >
+                <select
+                  id="activityType"
+                  v-model="formData.activityType"
+                  class="form-select"
+                  required
+                >
                   <option value="">请选择活动类型</option>
                   <option value="basic">基础泥彩人制作</option>
                   <option value="advanced">高级泥彩人创作</option>
@@ -45,15 +62,28 @@
                   <option value="workshop">企业团建工坊</option>
                   <option value="custom">定制主题活动</option>
                 </select>
-                <div class="error-message" v-if="errors.activityType">{{ errors.activityType }}</div>
+                <div class="error-message" v-if="errors.activityType">
+                  {{ errors.activityType }}
+                </div>
               </div>
 
               <!-- 预约日期 -->
               <div class="form-group">
-                <label for="reservationDate" class="form-label">预约日期 <span class="required">*</span></label>
-                <input type="date" id="reservationDate" v-model="formData.reservationDate" class="form-input"
-                  :min="minDate" :max="maxDate" required>
-                <div class="error-message" v-if="errors.reservationDate">{{ errors.reservationDate }}</div>
+                <label for="reservationDate" class="form-label"
+                  >预约日期 <span class="required">*</span></label
+                >
+                <input
+                  type="date"
+                  id="reservationDate"
+                  v-model="formData.reservationDate"
+                  class="form-input"
+                  :min="minDate"
+                  :max="maxDate"
+                  required
+                />
+                <div class="error-message" v-if="errors.reservationDate">
+                  {{ errors.reservationDate }}
+                </div>
                 <div class="date-notice" v-if="formData.reservationDate">
                   <span>{{ getWeekday(formData.reservationDate) }}</span>
                   <span v-if="isHoliday(formData.reservationDate)" class="holiday">节假日</span>
@@ -64,9 +94,15 @@
               <div class="form-group">
                 <label class="form-label">预约时间段 <span class="required">*</span></label>
                 <div class="time-slots">
-                  <button type="button" v-for="slot in availableTimeSlots" :key="slot.time" class="time-slot-btn"
+                  <button
+                    type="button"
+                    v-for="slot in availableTimeSlots"
+                    :key="slot.time"
+                    class="time-slot-btn"
                     :class="{ active: formData.timeSlot === slot.time, disabled: !slot.available }"
-                    :disabled="!slot.available" @click="selectTimeSlot(slot.time)">
+                    :disabled="!slot.available"
+                    @click="selectTimeSlot(slot.time)"
+                  >
                     {{ slot.time }}
                     <span class="time-slot-status">{{ slot.status }}</span>
                   </button>
@@ -77,63 +113,126 @@
               <!-- 预约人姓名 -->
               <div class="form-group">
                 <label for="name" class="form-label">姓名 <span class="required">*</span></label>
-                <input type="text" id="name" v-model="formData.name" class="form-input" placeholder="请输入您的姓名" required>
+                <input
+                  type="text"
+                  id="name"
+                  v-model="formData.name"
+                  class="form-input"
+                  placeholder="请输入您的姓名"
+                  required
+                />
                 <div class="error-message" v-if="errors.name">{{ errors.name }}</div>
               </div>
 
               <!-- 联系电话 -->
               <div class="form-group">
-                <label for="phone" class="form-label">联系电话 <span class="required">*</span></label>
-                <input type="tel" id="phone" v-model="formData.phone" class="form-input" placeholder="请输入您的联系电话"
-                  required>
+                <label for="phone" class="form-label"
+                  >联系电话 <span class="required">*</span></label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  v-model="formData.phone"
+                  class="form-input"
+                  placeholder="请输入您的联系电话"
+                  required
+                />
                 <div class="error-message" v-if="errors.phone">{{ errors.phone }}</div>
               </div>
 
               <!-- 电子邮箱 -->
               <div class="form-group">
                 <label for="email" class="form-label">电子邮箱</label>
-                <input type="email" id="email" v-model="formData.email" class="form-input" placeholder="请输入您的电子邮箱">
+                <input
+                  type="email"
+                  id="email"
+                  v-model="formData.email"
+                  class="form-input"
+                  placeholder="请输入您的电子邮箱"
+                />
                 <div class="error-message" v-if="errors.email">{{ errors.email }}</div>
               </div>
 
               <!-- 人数选择 -->
               <div class="form-group">
-                <label for="participants" class="form-label">参与人数 <span class="required">*</span></label>
+                <label for="participants" class="form-label"
+                  >参与人数 <span class="required">*</span></label
+                >
                 <div class="participants-selector">
-                  <button type="button" class="count-btn" @click="decreaseParticipants"
-                    :disabled="formData.participants <= 1">-
+                  <button
+                    type="button"
+                    class="count-btn"
+                    @click="decreaseParticipants"
+                    :disabled="formData.participants <= 1"
+                  >
+                    -
                   </button>
-                  <input type="number" id="participants" v-model.number="formData.participants"
-                    class="participants-input" min="1" max="50" required>
-                  <button type="button" class="count-btn" @click="increaseParticipants"
-                    :disabled="formData.participants >= 50">+
+                  <input
+                    type="number"
+                    id="participants"
+                    v-model.number="formData.participants"
+                    class="participants-input"
+                    min="1"
+                    max="50"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="count-btn"
+                    @click="increaseParticipants"
+                    :disabled="formData.participants >= 50"
+                  >
+                    +
                   </button>
                 </div>
-                <div class="error-message" v-if="errors.participants">{{ errors.participants }}</div>
+                <div class="error-message" v-if="errors.participants">
+                  {{ errors.participants }}
+                </div>
               </div>
 
               <!-- 团体名称（仅团体预约显示） -->
               <div class="form-group" v-if="formData.reservationType === 'group'">
-                <label for="groupName" class="form-label">团体名称 <span class="required">*</span></label>
-                <input type="text" id="groupName" v-model="formData.groupName" class="form-input" placeholder="请输入团体名称"
-                  required>
+                <label for="groupName" class="form-label"
+                  >团体名称 <span class="required">*</span></label
+                >
+                <input
+                  type="text"
+                  id="groupName"
+                  v-model="formData.groupName"
+                  class="form-input"
+                  placeholder="请输入团体名称"
+                  required
+                />
                 <div class="error-message" v-if="errors.groupName">{{ errors.groupName }}</div>
               </div>
 
               <!-- 特殊需求 -->
               <div class="form-group">
                 <label for="specialRequirements" class="form-label">特殊需求</label>
-                <textarea id="specialRequirements" v-model="formData.specialRequirements" class="form-textarea"
-                  placeholder="请输入您的特殊需求（如有）" rows="4"></textarea>
+                <textarea
+                  id="specialRequirements"
+                  v-model="formData.specialRequirements"
+                  class="form-textarea"
+                  placeholder="请输入您的特殊需求（如有）"
+                  rows="4"
+                ></textarea>
                 <div class="char-count">{{ formData.specialRequirements.length }}/200</div>
               </div>
 
               <!-- 验证码 -->
               <div class="form-group captcha-group">
-                <label for="captcha" class="form-label">验证码 <span class="required">*</span></label>
+                <label for="captcha" class="form-label"
+                  >验证码 <span class="required">*</span></label
+                >
                 <div class="captcha-wrapper">
-                  <input type="text" id="captcha" v-model="formData.captcha" class="form-input captcha-input"
-                    placeholder="请输入验证码" required>
+                  <input
+                    type="text"
+                    id="captcha"
+                    v-model="formData.captcha"
+                    class="form-input captcha-input"
+                    placeholder="请输入验证码"
+                    required
+                  />
                   <div class="captcha-image" @click="refreshCaptcha">
                     {{ captchaText }}
                   </div>
@@ -144,10 +243,16 @@
               <!-- 同意条款 -->
               <div class="form-group agreement-group">
                 <label class="agreement-label">
-                  <input type="checkbox" v-model="formData.agreeTerms" required>
+                  <input type="checkbox" v-model="formData.agreeTerms" required />
                   <span>
-                    我已阅读并同意<a href="#terms" class="terms-link" @click.stop="showTermsModal = true">《预约须知》</a>和<a
-                      href="#privacy" class="terms-link" @click.stop="showPrivacyModal = true">《隐私政策》</a>
+                    我已阅读并同意<a
+                      href="#terms"
+                      class="terms-link"
+                      @click.stop="showTermsModal = true"
+                      >《预约须知》</a
+                    >和<a href="#privacy" class="terms-link" @click.stop="showPrivacyModal = true"
+                      >《隐私政策》</a
+                    >
                   </span>
                 </label>
                 <div class="error-message" v-if="errors.agreeTerms">{{ errors.agreeTerms }}</div>
@@ -156,9 +261,7 @@
               <!-- 提交按钮 -->
               <div class="form-group">
                 <button type="submit" class="submit-btn" :disabled="submitting">
-                  <span v-if="submitting">
-                    <i class="icon-spinner icon-spin"></i> 提交中...
-                  </span>
+                  <span v-if="submitting"> <i class="icon-spinner icon-spin"></i> 提交中... </span>
                   <span v-else>提交预约</span>
                 </button>
               </div>
@@ -169,9 +272,7 @@
           <div class="reserve-info">
             <!-- 体验信息 -->
             <div class="info-card">
-              <h3 class="info-title">
-                <i class="icon-info-circle"></i> 体验信息
-              </h3>
+              <h3 class="info-title"><i class="icon-info-circle"></i> 体验信息</h3>
               <div class="info-content">
                 <div class="info-item">
                   <i class="icon-clock-o"></i>
@@ -198,9 +299,7 @@
 
             <!-- 预约须知 -->
             <div class="info-card">
-              <h3 class="info-title">
-                <i class="icon-exclamation-circle"></i> 预约须知
-              </h3>
+              <h3 class="info-title"><i class="icon-exclamation-circle"></i> 预约须知</h3>
               <div class="info-content">
                 <ul class="notice-list">
                   <li>请提前至少3天进行预约，团体预约需提前7天。</li>
@@ -216,9 +315,7 @@
 
             <!-- 联系咨询 -->
             <div class="info-card contact-card">
-              <h3 class="info-title">
-                <i class="icon-phone"></i> 联系咨询
-              </h3>
+              <h3 class="info-title"><i class="icon-phone"></i> 联系咨询</h3>
               <div class="info-content">
                 <p class="contact-text">如有任何疑问，请随时联系我们：</p>
                 <div class="contact-options">
@@ -243,7 +340,7 @@
         <div class="activities-grid">
           <div class="activity-card" v-for="(activity, index) in popularActivities" :key="index">
             <div class="activity-image">
-              <img :src="activity.image" :alt="activity.title" class="activity-img">
+              <img :src="activity.image" :alt="activity.title" class="activity-img" />
               <div class="activity-tag">{{ activity.tag }}</div>
             </div>
             <div class="activity-content">
@@ -253,9 +350,7 @@
                 <span class="activity-price">{{ activity.price }}</span>
                 <span class="activity-duration">{{ activity.duration }}</span>
               </div>
-              <button class="activity-btn" @click="reserveActivity(activity.type)">
-                立即预约
-              </button>
+              <button class="activity-btn" @click="reserveActivity(activity.type)">立即预约</button>
             </div>
           </div>
         </div>
@@ -325,10 +420,14 @@
         <div class="modal-body">
           <div class="terms-content">
             <h4>一、信息收集</h4>
-            <p>我们收集的个人信息包括但不限于您的姓名、联系电话、电子邮箱、预约人数、特殊需求等。</p>
+            <p>
+              我们收集的个人信息包括但不限于您的姓名、联系电话、电子邮箱、预约人数、特殊需求等。
+            </p>
 
             <h4>二、信息使用</h4>
-            <p>我们收集的个人信息仅用于为您提供预约服务、确认预约信息、联系您进行预约变更或取消等目的。</p>
+            <p>
+              我们收集的个人信息仅用于为您提供预约服务、确认预约信息、联系您进行预约变更或取消等目的。
+            </p>
 
             <h4>三、信息保护</h4>
             <p>我们采取严格的安全措施保护您的个人信息，防止信息泄露、丢失或被篡改。</p>
@@ -359,11 +458,11 @@
 <script lang="ts" setup>
 // 定义组件名称以符合多词规范
 defineOptions({
-  name: 'ReservePage'
-});
+  name: 'ReservePage',
+})
 
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import work1 from '@/assets/images/activity/work1.jpg';
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import work1 from '@/assets/images/activity/work1.jpg'
 
 // 表单数据
 const formData = ref({
@@ -378,83 +477,83 @@ const formData = ref({
   groupName: '',
   specialRequirements: '',
   captcha: '',
-  agreeTerms: false
-});
+  agreeTerms: false,
+})
 
 // 表单验证错误
 const errors = ref<{
-  reservationType?: string;
-  activityType?: string;
-  reservationDate?: string;
-  timeSlot?: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  participants?: string;
-  groupName?: string;
-  specialRequirements?: string;
-  captcha?: string;
-  agreeTerms?: string;
-}>({});
+  reservationType?: string
+  activityType?: string
+  reservationDate?: string
+  timeSlot?: string
+  name?: string
+  phone?: string
+  email?: string
+  participants?: string
+  groupName?: string
+  specialRequirements?: string
+  captcha?: string
+  agreeTerms?: string
+}>({})
 
 // 表单提交状态
-const submitting = ref(false);
+const submitting = ref(false)
 
 // 显示返回顶部按钮
-const showBackToTop = ref(false);
+const showBackToTop = ref(false)
 
 // 显示预约须知模态框
-const showTermsModal = ref(false);
+const showTermsModal = ref(false)
 
 // 显示隐私政策模态框
-const showPrivacyModal = ref(false);
+const showPrivacyModal = ref(false)
 
 // 验证码文本
-const captchaText = ref('');
+const captchaText = ref('')
 
 // 热门活动数据
 const popularActivities = ref([
   {
-    title: "亲子泥彩人体验",
-    description: "适合5-12岁儿童与家长一起参与，共同创作温馨的泥彩人作品。",
-    price: "160元/组",
-    duration: "约2小时",
+    title: '亲子泥彩人体验',
+    description: '适合5-12岁儿童与家长一起参与，共同创作温馨的泥彩人作品。',
+    price: '160元/组',
+    duration: '约2小时',
     image: work1,
-    tag: "亲子活动",
-    type: "family"
+    tag: '亲子活动',
+    type: 'family',
   },
   {
-    title: "企业团建工坊",
-    description: "为企业团队提供的特色团建活动，增强团队凝聚力，体验传统工艺魅力。",
-    price: "120元/人",
-    duration: "约2.5小时",
+    title: '企业团建工坊',
+    description: '为企业团队提供的特色团建活动，增强团队凝聚力，体验传统工艺魅力。',
+    price: '120元/人',
+    duration: '约2.5小时',
     image: work1,
-    tag: "团建活动",
-    type: "workshop"
+    tag: '团建活动',
+    type: 'workshop',
   },
   {
-    title: "高级泥彩人创作",
-    description: "针对有一定基础的学员，学习更复杂的泥彩人制作技巧和上色方法。",
-    price: "200元/人",
-    duration: "约3小时",
+    title: '高级泥彩人创作',
+    description: '针对有一定基础的学员，学习更复杂的泥彩人制作技巧和上色方法。',
+    price: '200元/人',
+    duration: '约3小时',
     image: work1,
-    tag: "进阶课程",
-    type: "advanced"
-  }
-]);
+    tag: '进阶课程',
+    type: 'advanced',
+  },
+])
 
 // 最小可预约日期（今天）
 const minDate = computed(() => {
-  const today = new Date();
-  return today.toISOString().split('T')[0];
-});
+  const today = new Date()
+  return today.toISOString().split('T')[0]
+})
 
 // 最大可预约日期（3个月后）
 const maxDate = computed(() => {
-  const today = new Date();
-  today.setMonth(today.getMonth() + 3);
-  return today.toISOString().split('T')[0];
-});
+  const today = new Date()
+  today.setMonth(today.getMonth() + 3)
+  return today.toISOString().split('T')[0]
+})
 
 // 可用时间段
 const availableTimeSlots = computed(() => {
@@ -465,182 +564,182 @@ const availableTimeSlots = computed(() => {
     { time: '11:00-12:30', available: true, status: '可预约' },
     { time: '13:30-15:00', available: true, status: '可预约' },
     { time: '15:30-17:00', available: false, status: '已满' },
-    { time: '17:30-19:00', available: true, status: '可预约' }
-  ];
+    { time: '17:30-19:00', available: true, status: '可预约' },
+  ]
 
   // 如果是节假日，增加晚上的时间段
   if (formData.value.reservationDate && isHoliday(formData.value.reservationDate)) {
-    slots.push(
-      { time: '19:30-21:00', available: true, status: '可预约' }
-    );
+    slots.push({ time: '19:30-21:00', available: true, status: '可预约' })
   }
 
-  return slots;
-});
+  return slots
+})
 
 // 生成验证码
 const generateCaptcha = () => {
-  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let result = '';
+  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let result = ''
   for (let i = 0; i < 4; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
   }
-  return result;
-};
+  return result
+}
 
 // 刷新验证码
 const refreshCaptcha = () => {
-  captchaText.value = generateCaptcha();
-};
+  captchaText.value = generateCaptcha()
+}
 
 // 获取星期几
 const getWeekday = (dateString: string | Date) => {
-  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-  const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
-  return weekdays[date.getDay()];
-};
+  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+  const date = typeof dateString === 'string' ? new Date(dateString) : dateString
+  return weekdays[date.getDay()]
+}
 
 // 判断是否为节假日
 const isHoliday = (dateString: string | Date) => {
   // 这里简单模拟，实际项目中应从后端获取节假日信息
-  const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
-  const day = date.getDay();
-  return day === 0 || day === 6; // 周末视为节假日
-};
+  const date = typeof dateString === 'string' ? new Date(dateString) : dateString
+  const day = date.getDay()
+  return day === 0 || day === 6 // 周末视为节假日
+}
 
 // 选择时间段
 const selectTimeSlot = (timeSlot: string) => {
-  formData.value.timeSlot = timeSlot;
-};
+  formData.value.timeSlot = timeSlot
+}
 
 // 减少参与人数
 const decreaseParticipants = () => {
   if (formData.value.participants > 1) {
-    formData.value.participants--;
+    formData.value.participants--
   }
-};
+}
 
 // 增加参与人数
 const increaseParticipants = () => {
   if (formData.value.participants < 50) {
-    formData.value.participants++;
+    formData.value.participants++
   }
-};
+}
 
 // 预约类型变更
 const onReservationTypeChange = () => {
   if (formData.value.reservationType === 'group' && formData.value.participants < 10) {
-    formData.value.participants = 10;
+    formData.value.participants = 10
   }
-};
+}
 
 // 预约特定活动
 const reserveActivity = (activityType: string) => {
-  formData.value.activityType = activityType;
-};
+  formData.value.activityType = activityType
+}
 
 // 表单验证
 const validateForm = () => {
-  let isValid = true;
-  errors.value = {};
+  let isValid = true
+  errors.value = {}
 
   // 验证预约类型
   if (!formData.value.reservationType) {
-    errors.value.reservationType = '请选择预约类型';
-    isValid = false;
+    errors.value.reservationType = '请选择预约类型'
+    isValid = false
   }
 
   // 验证活动类型
   if (!formData.value.activityType) {
-    errors.value.activityType = '请选择活动类型';
-    isValid = false;
+    errors.value.activityType = '请选择活动类型'
+    isValid = false
   }
 
   // 验证预约日期
   if (!formData.value.reservationDate) {
-    errors.value.reservationDate = '请选择预约日期';
-    isValid = false;
+    errors.value.reservationDate = '请选择预约日期'
+    isValid = false
   }
 
   // 验证时间段
   if (!formData.value.timeSlot) {
-    errors.value.timeSlot = '请选择预约时间段';
-    isValid = false;
+    errors.value.timeSlot = '请选择预约时间段'
+    isValid = false
   }
 
   // 验证姓名
   if (!formData.value.name.trim()) {
-    errors.value.name = '请输入您的姓名';
-    isValid = false;
+    errors.value.name = '请输入您的姓名'
+    isValid = false
   }
 
   // 验证电话
   if (!formData.value.phone.trim()) {
-    errors.value.phone = '请输入您的联系电话';
-    isValid = false;
+    errors.value.phone = '请输入您的联系电话'
+    isValid = false
   } else if (!/^1[3-9]\d{9}$/.test(formData.value.phone.trim())) {
-    errors.value.phone = '请输入有效的手机号码';
-    isValid = false;
+    errors.value.phone = '请输入有效的手机号码'
+    isValid = false
   }
 
   // 验证邮箱
-  if (formData.value.email.trim() && !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(formData.value.email)) {
-    errors.value.email = '请输入有效的邮箱地址';
-    isValid = false;
+  if (
+    formData.value.email.trim() &&
+    !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(formData.value.email)
+  ) {
+    errors.value.email = '请输入有效的邮箱地址'
+    isValid = false
   }
 
   // 验证参与人数
   if (formData.value.participants < 1 || formData.value.participants > 50) {
-    errors.value.participants = '参与人数必须在1-50人之间';
-    isValid = false;
+    errors.value.participants = '参与人数必须在1-50人之间'
+    isValid = false
   } else if (formData.value.reservationType === 'group' && formData.value.participants < 10) {
-    errors.value.participants = '团体预约人数至少为10人';
-    isValid = false;
+    errors.value.participants = '团体预约人数至少为10人'
+    isValid = false
   }
 
   // 验证团体名称（仅团体预约）
   if (formData.value.reservationType === 'group' && !formData.value.groupName.trim()) {
-    errors.value.groupName = '请输入团体名称';
-    isValid = false;
+    errors.value.groupName = '请输入团体名称'
+    isValid = false
   }
 
   // 验证特殊需求字符数
   if (formData.value.specialRequirements.length > 200) {
-    errors.value.specialRequirements = '特殊需求不能超过200个字符';
-    isValid = false;
+    errors.value.specialRequirements = '特殊需求不能超过200个字符'
+    isValid = false
   }
 
   // 验证验证码
   if (!formData.value.captcha.trim()) {
-    errors.value.captcha = '请输入验证码';
-    isValid = false;
+    errors.value.captcha = '请输入验证码'
+    isValid = false
   } else if (formData.value.captcha.toUpperCase() !== captchaText.value) {
-    errors.value.captcha = '验证码错误';
-    isValid = false;
+    errors.value.captcha = '验证码错误'
+    isValid = false
   }
 
   // 验证同意条款
   if (!formData.value.agreeTerms) {
-    errors.value.agreeTerms = '请阅读并同意预约须知和隐私政策';
-    isValid = false;
+    errors.value.agreeTerms = '请阅读并同意预约须知和隐私政策'
+    isValid = false
   }
 
-  return isValid;
-};
+  return isValid
+}
 
 // 提交预约表单
 const submitReservation = () => {
   if (!validateForm()) {
-    return;
+    return
   }
 
-  submitting.value = true;
-
+  submitting.value = true
 
   // 模拟API请求
   setTimeout(() => {
-    submitting.value = false;
-    alert('预约提交成功！我们会在24小时内与您联系确认详情。');
+    submitting.value = false
+    alert('预约提交成功！我们会在24小时内与您联系确认详情。')
 
     // 重置表单
     formData.value = {
@@ -655,37 +754,37 @@ const submitReservation = () => {
       groupName: '',
       specialRequirements: '',
       captcha: '',
-      agreeTerms: false
-    };
+      agreeTerms: false,
+    }
 
     // 刷新验证码
-    refreshCaptcha();
-  }, 1500);
-};
+    refreshCaptcha()
+  }, 1500)
+}
 
 // 返回顶部
 const backToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
 
 // 监听滚动事件
 const handleScroll = () => {
-  showBackToTop.value = window.scrollY > 300;
-};
+  showBackToTop.value = window.scrollY > 300
+}
 
 // 组件挂载时初始化
 onMounted(() => {
   // 生成初始验证码
-  refreshCaptcha();
+  refreshCaptcha()
 
   // 监听滚动事件
-  window.addEventListener('scroll', handleScroll);
-});
+  window.addEventListener('scroll', handleScroll)
+})
 
 // 组件卸载时清理
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style scoped>
@@ -790,7 +889,7 @@ section {
   cursor: pointer;
 }
 
-.radio-label input[type="radio"] {
+.radio-label input[type='radio'] {
   width: 18px;
   height: 18px;
   cursor: pointer;
@@ -983,7 +1082,7 @@ section {
   cursor: pointer;
 }
 
-.agreement-label input[type="checkbox"] {
+.agreement-label input[type='checkbox'] {
   margin-top: 2px;
   width: 16px;
   height: 16px;
@@ -1094,7 +1193,7 @@ section {
 }
 
 .notice-list li:before {
-  content: "•";
+  content: '•';
   position: absolute;
   left: 0;
   color: #d93b30;

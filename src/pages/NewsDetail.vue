@@ -27,7 +27,7 @@
             <!-- 新闻正文内容 -->
             <div class="news-content" v-if="newsDetail">
               <div class="news-image">
-                <img :src="newsDetail.image" :alt="newsDetail.title" class="main-image">
+                <img :src="newsDetail.image" :alt="newsDetail.title" class="main-image" />
               </div>
               <div class="news-body" v-html="formatContent(newsDetail.content)"></div>
             </div>
@@ -53,7 +53,7 @@
                   <i class="icon-weixin"></i>
                   微信
                   <div class="weixin-code" v-if="showWeixinCode">
-                    <img :src="weixinCodeImg" alt="微信分享二维码">
+                    <img :src="weixinCodeImg" alt="微信分享二维码" />
                     <p>扫码分享</p>
                   </div>
                 </button>
@@ -76,11 +76,15 @@
             <div class="prev-next-section" v-if="hasPrevNews || hasNextNews">
               <div class="prev-news" v-if="hasPrevNews">
                 <span class="label">上一篇：</span>
-                <router-link :to="`/news/${prevNewsId}`" class="link">{{ prevNewsTitle }}</router-link>
+                <router-link :to="`/news/${prevNewsId}`" class="link">{{
+                  prevNewsTitle
+                  }}</router-link>
               </div>
               <div class="next-news" v-if="hasNextNews">
                 <span class="label">下一篇：</span>
-                <router-link :to="`/news/${nextNewsId}`" class="link">{{ nextNewsTitle }}</router-link>
+                <router-link :to="`/news/${nextNewsId}`" class="link">{{
+                  nextNewsTitle
+                  }}</router-link>
               </div>
             </div>
           </div>
@@ -94,7 +98,7 @@
                 <li v-for="item in relatedNews" :key="item.id">
                   <router-link :to="`/news/${item.id}`" class="related-item">
                     <div class="related-img-container">
-                      <img :src="item.image" :alt="item.title" class="related-img">
+                      <img :src="item.image" :alt="item.title" class="related-img" />
                     </div>
                     <div class="related-content">
                       <h4 class="related-title">{{ item.title }}</h4>
@@ -124,7 +128,7 @@
                 <h3 class="subscribe-title">订阅泥彩人新闻</h3>
                 <p class="subscribe-desc">第一时间获取泥彩人非遗文化的最新资讯</p>
                 <form class="subscribe-form">
-                  <input type="email" placeholder="请输入您的邮箱" class="subscribe-input">
+                  <input type="email" placeholder="请输入您的邮箱" class="subscribe-input" />
                   <button type="button" class="subscribe-btn">立即订阅</button>
                 </form>
               </div>
@@ -143,7 +147,7 @@
         <!-- 评论输入框 -->
         <div class="comment-input-section">
           <div class="user-avatar">
-            <img :src="userAvatarImg" alt="用户头像">
+            <img :src="userAvatarImg" alt="用户头像" />
           </div>
           <div class="comment-input-wrapper">
             <textarea placeholder="写下您的评论..." class="comment-textarea" v-model="commentText"></textarea>
@@ -160,7 +164,7 @@
         <div class="comment-list">
           <div class="comment-item" v-for="comment in comments" :key="comment.id">
             <div class="comment-avatar">
-              <img :src="comment.avatar" :alt="comment.username">
+              <img :src="comment.avatar" :alt="comment.username" />
             </div>
             <div class="comment-content">
               <div class="comment-header">
@@ -184,9 +188,7 @@
 
         <!-- 加载更多评论 -->
         <div class="load-more" v-if="hasMoreComments">
-          <button class="load-more-btn" @click="loadMoreComments">
-            加载更多评论
-          </button>
+          <button class="load-more-btn" @click="loadMoreComments">加载更多评论</button>
         </div>
       </div>
     </section>
@@ -194,270 +196,286 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 // 导入图片资源
-import news1Img from '@/assets/images/news/news1.jpg';
-import news2Img from '@/assets/images/news/news2.jpg';
-import news3Img from '@/assets/images/news/news3.jpg';
-import news4Img from '@/assets/images/news/news4.jpg';
-import news5Img from '@/assets/images/news/news5.jpg';
-import avatar1Img from '@/assets/images/other/avatar1.png';
-import avatar2Img from '@/assets/images/other/avatar2.png';
-import avatar3Img from '@/assets/images/other/avatar3.png';
-import userAvatarImg from '@/assets/images/other/user-avatar.png';
-import weixinCodeImg from '@/assets/images/other/weixin-code.png';
+import news1Img from '@/assets/images/news/news1.jpg'
+import news2Img from '@/assets/images/news/news2.jpg'
+import news3Img from '@/assets/images/news/news3.jpg'
+import news4Img from '@/assets/images/news/news4.jpg'
+import news5Img from '@/assets/images/news/news5.jpg'
+import avatar1Img from '@/assets/images/other/avatar1.png'
+import avatar2Img from '@/assets/images/other/avatar2.png'
+import avatar3Img from '@/assets/images/other/avatar3.png'
+import userAvatarImg from '@/assets/images/other/user-avatar.png'
+import weixinCodeImg from '@/assets/images/other/weixin-code.png'
 
 // 路由相关
-const route = useRoute();
+const route = useRoute()
 
-const newsId = ref(Number(route.params.id) || 1);
+const newsId = ref(Number(route.params.id) || 1)
 
 // 定义新闻详情类型
 interface NewsDetail {
-  id: number;
-  title: string;
-  excerpt: string;
-  content: string;
-  image: string;
-  category: string;
-  date: string;
-  views: number;
-  likes: number;
+  id: number
+  title: string
+  excerpt: string
+  content: string
+  image: string
+  category: string
+  date: string
+  views: number
+  likes: number
 }
 
 // 状态管理
-const loading = ref(false);
-const newsDetail = ref<NewsDetail | null>(null);
-const showWeixinCode = ref(false);
-const commentText = ref('');
-const hasMoreComments = ref(true);
+const loading = ref(false)
+const newsDetail = ref<NewsDetail | null>(null)
+const showWeixinCode = ref(false)
+const commentText = ref('')
+const hasMoreComments = ref(true)
 const comments = ref([
   {
     id: 1,
     username: '传统文化爱好者',
     avatar: avatar1Img,
-    content: '非常精彩的报道！泥彩人作为传统非遗文化，确实需要更多这样的宣传和推广活动。希望能看到更多关于泥彩人制作技艺的详细介绍。',
+    content:
+      '非常精彩的报道！泥彩人作为传统非遗文化，确实需要更多这样的宣传和推广活动。希望能看到更多关于泥彩人制作技艺的详细介绍。',
     time: '2023-10-21 15:30:00',
     likes: 32,
-    liked: false
+    liked: false,
   },
   {
     id: 2,
     username: '艺术从业者',
     avatar: avatar2Img,
-    content: '作为一名艺术从业者，我非常欣赏泥彩人的艺术表现力。希望这次大赛能涌现出更多创新作品，让传统工艺焕发新的生命力。',
+    content:
+      '作为一名艺术从业者，我非常欣赏泥彩人的艺术表现力。希望这次大赛能涌现出更多创新作品，让传统工艺焕发新的生命力。',
     time: '2023-10-21 16:45:00',
     likes: 28,
-    liked: true
+    liked: true,
   },
   {
     id: 3,
     username: '非遗研究者',
     avatar: avatar3Img,
-    content: '全国性的泥彩人技艺大赛对于推动这一非遗项目的保护和传承具有重要意义。期待看到比赛的更多细节和获奖作品展示。',
+    content:
+      '全国性的泥彩人技艺大赛对于推动这一非遗项目的保护和传承具有重要意义。期待看到比赛的更多细节和获奖作品展示。',
     time: '2023-10-22 09:12:00',
     likes: 45,
-    liked: false
-  }
-]);
+    liked: false,
+  },
+])
 
 // 模拟所有新闻数据
 const allNews = ref([
   {
     id: 1,
     title: '2023年全国泥彩人技艺大赛在南京成功举办',
-    excerpt: '本次大赛吸引了来自全国各地的200多位泥彩人传承人和爱好者参与，展示了泥彩人技艺的多样性和创新性...',
-    content: '2023年全国泥彩人技艺大赛于10月15日至18日在南京国际博览中心成功举办。本次大赛由文化和旅游部非物质文化遗产司、江苏省文化和旅游厅主办，旨在推动泥彩人技艺的传承和创新，促进泥彩人行业的交流与发展。\n\n本次大赛吸引了来自全国各地的200多位泥彩人传承人和爱好者参与，分为传统技艺组、创新设计组和青年传承组三个组别，共收到参赛作品300余件。经过专家评审，最终评选出金奖10名、银奖20名、铜奖30名以及最佳创意奖、最佳传承奖等多个单项奖。\n\n大赛期间还举办了泥彩人技艺展示、非遗论坛、传承人手把手教学等多项活动，吸引了数万名观众前来参观和体验。许多观众表示，通过这次活动，他们更加深入地了解了泥彩人的历史文化和制作技艺，对这项传统非遗有了新的认识和喜爱。\n\n据主办方介绍，本次大赛的成功举办，不仅为泥彩人传承人和爱好者提供了一个展示和交流的平台，也为泥彩人技艺的传承和创新注入了新的活力。未来，他们将继续举办类似的活动，推动泥彩人技艺的保护、传承和发展。',
+    excerpt:
+      '本次大赛吸引了来自全国各地的200多位泥彩人传承人和爱好者参与，展示了泥彩人技艺的多样性和创新性...',
+    content:
+      '2023年全国泥彩人技艺大赛于10月15日至18日在南京国际博览中心成功举办。本次大赛由文化和旅游部非物质文化遗产司、江苏省文化和旅游厅主办，旨在推动泥彩人技艺的传承和创新，促进泥彩人行业的交流与发展。\n\n本次大赛吸引了来自全国各地的200多位泥彩人传承人和爱好者参与，分为传统技艺组、创新设计组和青年传承组三个组别，共收到参赛作品300余件。经过专家评审，最终评选出金奖10名、银奖20名、铜奖30名以及最佳创意奖、最佳传承奖等多个单项奖。\n\n大赛期间还举办了泥彩人技艺展示、非遗论坛、传承人手把手教学等多项活动，吸引了数万名观众前来参观和体验。许多观众表示，通过这次活动，他们更加深入地了解了泥彩人的历史文化和制作技艺，对这项传统非遗有了新的认识和喜爱。\n\n据主办方介绍，本次大赛的成功举办，不仅为泥彩人传承人和爱好者提供了一个展示和交流的平台，也为泥彩人技艺的传承和创新注入了新的活力。未来，他们将继续举办类似的活动，推动泥彩人技艺的保护、传承和发展。',
     image: news1Img,
     category: 'activity',
     date: '2023-10-20',
     views: 2538,
-    likes: 156
+    likes: 156,
   },
   {
     id: 2,
     title: '泥彩人制作技艺被列入国家级非物质文化遗产代表性项目',
-    excerpt: '近日，国务院公布了第五批国家级非物质文化遗产代表性项目名录，泥彩人制作技艺成功入选...',
-    content: '近日，国务院公布了第五批国家级非物质文化遗产代表性项目名录，泥彩人制作技艺成功入选。这是泥彩人制作技艺保护和传承工作的重要里程碑，标志着这项传统工艺得到了国家层面的认可和重视。\n\n泥彩人制作技艺是中国传统民间工艺的重要组成部分，有着悠久的历史和深厚的文化底蕴。它以泥土为主要材料，通过手工捏制、彩绘等工序，制作出形态各异、色彩鲜艳的人物、动物、神话传说等题材的作品，具有很高的艺术价值和历史价值。\n\n近年来，随着社会经济的发展和人们生活方式的变化，泥彩人制作技艺面临着传承困难、市场萎缩等问题。为了保护和传承这项传统技艺，各地文化部门和传承人采取了一系列措施，如建立传习所、开展传承人培训、举办展览展示活动、开发文创产品等，取得了一定的成效。\n\n此次入选国家级非物质文化遗产代表性项目，将为泥彩人制作技艺的保护和传承提供更好的政策支持和资金保障。相信在各方的共同努力下，泥彩人制作技艺一定能够焕发新的生机和活力，为中华优秀传统文化的传承和发展做出更大的贡献。',
+    excerpt:
+      '近日，国务院公布了第五批国家级非物质文化遗产代表性项目名录，泥彩人制作技艺成功入选...',
+    content:
+      '近日，国务院公布了第五批国家级非物质文化遗产代表性项目名录，泥彩人制作技艺成功入选。这是泥彩人制作技艺保护和传承工作的重要里程碑，标志着这项传统工艺得到了国家层面的认可和重视。\n\n泥彩人制作技艺是中国传统民间工艺的重要组成部分，有着悠久的历史和深厚的文化底蕴。它以泥土为主要材料，通过手工捏制、彩绘等工序，制作出形态各异、色彩鲜艳的人物、动物、神话传说等题材的作品，具有很高的艺术价值和历史价值。\n\n近年来，随着社会经济的发展和人们生活方式的变化，泥彩人制作技艺面临着传承困难、市场萎缩等问题。为了保护和传承这项传统技艺，各地文化部门和传承人采取了一系列措施，如建立传习所、开展传承人培训、举办展览展示活动、开发文创产品等，取得了一定的成效。\n\n此次入选国家级非物质文化遗产代表性项目，将为泥彩人制作技艺的保护和传承提供更好的政策支持和资金保障。相信在各方的共同努力下，泥彩人制作技艺一定能够焕发新的生机和活力，为中华优秀传统文化的传承和发展做出更大的贡献。',
     image: news2Img,
     category: 'heritage',
     date: '2023-09-15',
     views: 3245,
-    likes: 218
+    likes: 218,
   },
   {
     id: 3,
     title: '"泥彩人生"主题展览在上海博物馆开幕',
-    excerpt: '本次展览汇集了来自全国各地的300多件泥彩人精品，包括传统经典作品和现代创新作品，全面展示了泥彩人的艺术魅力和文化内涵...',
-    content: '由上海博物馆主办的"泥彩人生"主题展览于9月10日正式开幕，展览将持续至12月10日。本次展览汇集了来自全国各地的300多件泥彩人精品，包括传统经典作品和现代创新作品，全面展示了泥彩人的艺术魅力和文化内涵。\n\n展览分为"历史渊源"、"技艺传承"、"艺术特色"、"创新发展"四个部分，通过实物展示、图片说明、视频播放、互动体验等多种形式，向观众介绍泥彩人的历史发展、制作工艺、艺术特点和现代转型。其中，明代的"大阿福"、清代的"福禄寿三星"、民国时期的"京剧脸谱"等经典作品尤为引人注目，吸引了众多观众驻足欣赏。\n\n为了增强观众的参与感和体验感，展览还设置了互动体验区，观众可以在专业传承人的指导下，亲身体验泥彩人的制作过程，感受传统工艺的魅力。许多观众表示，通过这次展览，他们不仅欣赏到了精美的泥彩人作品，还了解了泥彩人的历史文化和制作技艺，收获颇丰。\n\n上海博物馆相关负责人表示，举办此次展览的目的是让更多的人了解和喜爱泥彩人这一传统非遗，促进泥彩人技艺的传承和发展。展览期间，他们还将举办讲座、工作坊等系列活动，为观众提供更多了解泥彩人的机会。',
+    excerpt:
+      '本次展览汇集了来自全国各地的300多件泥彩人精品，包括传统经典作品和现代创新作品，全面展示了泥彩人的艺术魅力和文化内涵...',
+    content:
+      '由上海博物馆主办的"泥彩人生"主题展览于9月10日正式开幕，展览将持续至12月10日。本次展览汇集了来自全国各地的300多件泥彩人精品，包括传统经典作品和现代创新作品，全面展示了泥彩人的艺术魅力和文化内涵。\n\n展览分为"历史渊源"、"技艺传承"、"艺术特色"、"创新发展"四个部分，通过实物展示、图片说明、视频播放、互动体验等多种形式，向观众介绍泥彩人的历史发展、制作工艺、艺术特点和现代转型。其中，明代的"大阿福"、清代的"福禄寿三星"、民国时期的"京剧脸谱"等经典作品尤为引人注目，吸引了众多观众驻足欣赏。\n\n为了增强观众的参与感和体验感，展览还设置了互动体验区，观众可以在专业传承人的指导下，亲身体验泥彩人的制作过程，感受传统工艺的魅力。许多观众表示，通过这次展览，他们不仅欣赏到了精美的泥彩人作品，还了解了泥彩人的历史文化和制作技艺，收获颇丰。\n\n上海博物馆相关负责人表示，举办此次展览的目的是让更多的人了解和喜爱泥彩人这一传统非遗，促进泥彩人技艺的传承和发展。展览期间，他们还将举办讲座、工作坊等系列活动，为观众提供更多了解泥彩人的机会。',
     image: news3Img,
     category: 'exhibition',
     date: '2023-09-12',
     views: 1876,
-    likes: 132
+    likes: 132,
   },
   {
     id: 4,
     title: '泥彩人走进校园，非遗传承从娃娃抓起',
-    excerpt: '为了让更多的青少年了解和喜爱泥彩人这一传统非遗，近日，"泥彩人进校园"活动在苏州市多所小学展开...',
-    content: '为了让更多的青少年了解和喜爱泥彩人这一传统非遗，近日，由苏州市文化广电和旅游局主办的"泥彩人进校园"活动在苏州市多所小学展开。本次活动邀请了国家级非遗传承人张明山、省级非遗传承人李巧云等多位专家，通过讲座、展示、互动教学等形式，向小学生们介绍泥彩人的历史文化和制作技艺。\n\n活动中，传承人首先通过图文并茂的讲座，向同学们介绍了泥彩人的起源、发展、艺术特点和文化内涵，让同学们对泥彩人有了初步的认识。接着，传承人现场展示了泥彩人的制作过程，从选泥、和泥、捏制、晾干到彩绘，每一个步骤都详细讲解，同学们看得津津有味。最后，在传承人的指导下，同学们亲自动手制作简单的泥彩人作品，体验传统工艺的乐趣。\n\n许多同学表示，这次活动非常有趣，他们不仅了解了泥彩人的相关知识，还亲手制作了泥彩人作品，感受到了传统工艺的魅力。家长们也纷纷表示，这样的活动非常有意义，能够让孩子们在轻松愉快的氛围中学习传统文化，增强文化自信。\n\n据活动主办方介绍，"泥彩人进校园"活动是苏州市非物质文化遗产传承保护工作的重要组成部分，旨在通过学校教育这一主渠道，培养青少年对传统文化的兴趣和热爱，为非遗传承储备后备人才。未来，他们将继续开展此类活动，让更多的青少年了解和喜爱泥彩人这一传统非遗。',
+    excerpt:
+      '为了让更多的青少年了解和喜爱泥彩人这一传统非遗，近日，"泥彩人进校园"活动在苏州市多所小学展开...',
+    content:
+      '为了让更多的青少年了解和喜爱泥彩人这一传统非遗，近日，由苏州市文化广电和旅游局主办的"泥彩人进校园"活动在苏州市多所小学展开。本次活动邀请了国家级非遗传承人张明山、省级非遗传承人李巧云等多位专家，通过讲座、展示、互动教学等形式，向小学生们介绍泥彩人的历史文化和制作技艺。\n\n活动中，传承人首先通过图文并茂的讲座，向同学们介绍了泥彩人的起源、发展、艺术特点和文化内涵，让同学们对泥彩人有了初步的认识。接着，传承人现场展示了泥彩人的制作过程，从选泥、和泥、捏制、晾干到彩绘，每一个步骤都详细讲解，同学们看得津津有味。最后，在传承人的指导下，同学们亲自动手制作简单的泥彩人作品，体验传统工艺的乐趣。\n\n许多同学表示，这次活动非常有趣，他们不仅了解了泥彩人的相关知识，还亲手制作了泥彩人作品，感受到了传统工艺的魅力。家长们也纷纷表示，这样的活动非常有意义，能够让孩子们在轻松愉快的氛围中学习传统文化，增强文化自信。\n\n据活动主办方介绍，"泥彩人进校园"活动是苏州市非物质文化遗产传承保护工作的重要组成部分，旨在通过学校教育这一主渠道，培养青少年对传统文化的兴趣和热爱，为非遗传承储备后备人才。未来，他们将继续开展此类活动，让更多的青少年了解和喜爱泥彩人这一传统非遗。',
     image: news4Img,
     category: 'education',
     date: '2023-08-25',
     views: 2134,
-    likes: 178
+    likes: 178,
   },
   {
     id: 5,
     title: '泥彩人文创产品设计大赛结果揭晓',
-    excerpt: '为了推动泥彩人技艺的创新发展，促进传统工艺与现代设计的融合，近日，"泥彩人文创产品设计大赛"结果揭晓...',
-    content: '为了推动泥彩人技艺的创新发展，促进传统工艺与现代设计的融合，近日，由江苏省文化和旅游厅、江苏省工业设计协会主办的"泥彩人文创产品设计大赛"结果揭晓。本次大赛共收到来自全国各地的参赛作品200余件，经过专家评审，最终评选出金奖1名、银奖3名、铜奖5名以及最佳创意奖、最佳市场潜力奖等多个单项奖。\n\n获奖作品既有对传统泥彩人技艺的传承和创新，也有将泥彩人元素与现代设计理念相结合的全新尝试，涵盖了家居装饰、文具用品、服装配饰、礼品等多个领域。其中，金奖作品《泥彩人表情包系列文创产品》将传统泥彩人的形象与现代表情包文化相结合，设计了一系列生动有趣的文创产品，深受评委和观众的喜爱。\n\n大赛期间还举办了泥彩人文创产品展示、设计论坛、产业对接会等活动，为设计师、传承人和企业搭建了交流与合作的平台。许多企业表示，通过这次大赛，他们发现了许多优秀的设计作品和创新理念，希望能够与设计师和传承人合作，将这些作品推向市场。\n\n主办方表示，举办此次大赛的目的是鼓励设计师和传承人发挥创意，开发更多符合现代人审美和需求的泥彩人文创产品，拓展泥彩人的应用领域和市场空间，推动泥彩人技艺的创新发展。未来，他们将继续举办类似的活动，为泥彩人的传承和发展注入新的活力。',
+    excerpt:
+      '为了推动泥彩人技艺的创新发展，促进传统工艺与现代设计的融合，近日，"泥彩人文创产品设计大赛"结果揭晓...',
+    content:
+      '为了推动泥彩人技艺的创新发展，促进传统工艺与现代设计的融合，近日，由江苏省文化和旅游厅、江苏省工业设计协会主办的"泥彩人文创产品设计大赛"结果揭晓。本次大赛共收到来自全国各地的参赛作品200余件，经过专家评审，最终评选出金奖1名、银奖3名、铜奖5名以及最佳创意奖、最佳市场潜力奖等多个单项奖。\n\n获奖作品既有对传统泥彩人技艺的传承和创新，也有将泥彩人元素与现代设计理念相结合的全新尝试，涵盖了家居装饰、文具用品、服装配饰、礼品等多个领域。其中，金奖作品《泥彩人表情包系列文创产品》将传统泥彩人的形象与现代表情包文化相结合，设计了一系列生动有趣的文创产品，深受评委和观众的喜爱。\n\n大赛期间还举办了泥彩人文创产品展示、设计论坛、产业对接会等活动，为设计师、传承人和企业搭建了交流与合作的平台。许多企业表示，通过这次大赛，他们发现了许多优秀的设计作品和创新理念，希望能够与设计师和传承人合作，将这些作品推向市场。\n\n主办方表示，举办此次大赛的目的是鼓励设计师和传承人发挥创意，开发更多符合现代人审美和需求的泥彩人文创产品，拓展泥彩人的应用领域和市场空间，推动泥彩人技艺的创新发展。未来，他们将继续举办类似的活动，为泥彩人的传承和发展注入新的活力。',
     image: news5Img,
     category: 'innovation',
     date: '2023-08-15',
     views: 1987,
-    likes: 145
-  }
-]);
+    likes: 145,
+  },
+])
 
 // 获取新闻详情
 const getNewsDetail = () => {
-  loading.value = true;
+  loading.value = true
   // 模拟API请求延迟
   setTimeout(() => {
-    const news = allNews.value.find(item => item.id === newsId.value);
-    newsDetail.value = news || null;
-    loading.value = false;
-  }, 500);
-};
+    const news = allNews.value.find((item) => item.id === newsId.value)
+    newsDetail.value = news || null
+    loading.value = false
+  }, 500)
+}
 
 // 获取分类文本
 const getCategoryText = (category: string | undefined) => {
-  if (!category) return '';
+  if (!category) return ''
   const categoryMap: Record<string, string> = {
-    'activity': '活动动态',
-    'heritage': '传承保护',
-    'exhibition': '展览信息',
-    'education': '教育传承',
-    'innovation': '创新发展'
-  };
-  return categoryMap[category] || '';
-};
+    activity: '活动动态',
+    heritage: '传承保护',
+    exhibition: '展览信息',
+    education: '教育传承',
+    innovation: '创新发展',
+  }
+  return categoryMap[category] || ''
+}
 
 // 格式化日期
 const formatDate = (dateString: string | undefined) => {
-  if (!dateString) return '';
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
 
 // 格式化评论时间
 const formatCommentTime = (timeString: string) => {
-  const now = new Date().getTime();
-  const date = new Date(timeString).getTime();
-  const diffTime = now - date;
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
-  const diffMinutes = Math.floor(diffTime / (1000 * 60));
+  const now = new Date().getTime()
+  const date = new Date(timeString).getTime()
+  const diffTime = now - date
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+  const diffHours = Math.floor(diffTime / (1000 * 60 * 60))
+  const diffMinutes = Math.floor(diffTime / (1000 * 60))
 
   if (diffDays > 0) {
-    return `${diffDays}天前`;
+    return `${diffDays}天前`
   } else if (diffHours > 0) {
-    return `${diffHours}小时前`;
+    return `${diffHours}小时前`
   } else if (diffMinutes > 0) {
-    return `${diffMinutes}分钟前`;
+    return `${diffMinutes}分钟前`
   } else {
-    return '刚刚';
+    return '刚刚'
   }
-};
+}
 
 // 格式化内容（处理换行符）
 const formatContent = (content: string) => {
-  if (!content) return '';
+  if (!content) return ''
   // 将\n\n替换为<p>标签，\n替换为<br>标签
-  return content.split('\n\n').map((paragraph: string) => {
-    if (paragraph.trim()) {
-      return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
-    }
-    return '';
-  }).join('');
-};
+  return content
+    .split('\n\n')
+    .map((paragraph: string) => {
+      if (paragraph.trim()) {
+        return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`
+      }
+      return ''
+    })
+    .join('')
+}
 
 // 相关新闻计算
 const relatedNews = computed(() => {
-  if (!newsDetail.value) return [];
+  if (!newsDetail.value) return []
   // 按分类筛选相关新闻，排除当前新闻
   const related = allNews.value
-    .filter(item => newsDetail.value && item.category === newsDetail.value.category && item.id !== newsId.value)
+    .filter(
+      (item) =>
+        newsDetail.value && item.category === newsDetail.value.category && item.id !== newsId.value,
+    )
     .sort((a, b) => b.views - a.views)
-    .slice(0, 3);
+    .slice(0, 3)
 
   // 如果同分类新闻不足3条，补充其他热门新闻
   if (related.length < 3) {
     const additionalNews = allNews.value
-      .filter(item => item.id !== newsId.value && !related.some(r => r.id === item.id))
+      .filter((item) => item.id !== newsId.value && !related.some((r) => r.id === item.id))
       .sort((a, b) => b.views - a.views)
-      .slice(0, 3 - related.length);
-    related.push(...additionalNews);
+      .slice(0, 3 - related.length)
+    related.push(...additionalNews)
   }
 
-  return related;
-});
+  return related
+})
 
 // 热门新闻计算
 const hotNews = computed(() => {
   // 按浏览量排序，取前5条
-  return allNews.value
-    .sort((a, b) => b.views - a.views)
-    .slice(0, 5);
-});
+  return allNews.value.sort((a, b) => b.views - a.views).slice(0, 5)
+})
 
 // 上一篇/下一篇计算
 const hasPrevNews = computed(() => {
-  return allNews.value.some(item => item.id < newsId.value);
-});
+  return allNews.value.some((item) => item.id < newsId.value)
+})
 
 const hasNextNews = computed(() => {
-  return allNews.value.some(item => item.id > newsId.value);
-});
+  return allNews.value.some((item) => item.id > newsId.value)
+})
 
 const prevNews = computed(() => {
-  if (!hasPrevNews.value) return null;
-  return allNews.value
-    .filter(item => item.id < newsId.value)
-    .sort((a, b) => b.id - a.id)[0];
-});
+  if (!hasPrevNews.value) return null
+  return allNews.value.filter((item) => item.id < newsId.value).sort((a, b) => b.id - a.id)[0]
+})
 
 const nextNews = computed(() => {
-  if (!hasNextNews.value) return null;
-  return allNews.value
-    .filter(item => item.id > newsId.value)
-    .sort((a, b) => a.id - b.id)[0];
-});
+  if (!hasNextNews.value) return null
+  return allNews.value.filter((item) => item.id > newsId.value).sort((a, b) => a.id - b.id)[0]
+})
 
-const prevNewsId = computed(() => prevNews.value?.id || null);
-const prevNewsTitle = computed(() => prevNews.value?.title || '');
-const nextNewsId = computed(() => nextNews.value?.id || null);
-const nextNewsTitle = computed(() => nextNews.value?.title || '');
+const prevNewsId = computed(() => prevNews.value?.id || null)
+const prevNewsTitle = computed(() => prevNews.value?.title || '')
+const nextNewsId = computed(() => nextNews.value?.id || null)
+const nextNewsTitle = computed(() => nextNews.value?.title || '')
 
 // 复制链接
 const copyLink = () => {
-  const url = window.location.href;
-  navigator.clipboard.writeText(url).then(() => {
-    alert('链接已复制到剪贴板');
-  }).catch(() => {
-    alert('复制失败，请手动复制');
-  });
-};
+  const url = window.location.href
+  navigator.clipboard
+    .writeText(url)
+    .then(() => {
+      alert('链接已复制到剪贴板')
+    })
+    .catch(() => {
+      alert('复制失败，请手动复制')
+    })
+}
 
 // 提交评论
 const submitComment = () => {
-  if (!commentText.value.trim()) return;
+  if (!commentText.value.trim()) return
 
   const newComment = {
     id: Date.now(),
@@ -466,46 +484,49 @@ const submitComment = () => {
     content: commentText.value.trim(),
     time: new Date().toISOString().replace('T', ' ').substring(0, 19),
     likes: 0,
-    liked: false
-  };
+    liked: false,
+  }
 
-  comments.value.unshift(newComment);
-  commentText.value = '';
-  alert('评论发表成功！');
-};
+  comments.value.unshift(newComment)
+  commentText.value = ''
+  alert('评论发表成功！')
+}
 
 // 点赞/取消点赞
 const toggleLike = (commentId: number) => {
-  const comment = comments.value.find(c => c.id === commentId);
+  const comment = comments.value.find((c) => c.id === commentId)
   if (comment) {
     if (comment.liked) {
-      comment.likes--;
+      comment.likes--
     } else {
-      comment.likes++;
+      comment.likes++
     }
-    comment.liked = !comment.liked;
+    comment.liked = !comment.liked
   }
-};
+}
 
 // 加载更多评论
 const loadMoreComments = () => {
   // 模拟加载更多评论
   setTimeout(() => {
-    hasMoreComments.value = false;
-    alert('没有更多评论了');
-  }, 500);
-};
+    hasMoreComments.value = false
+    alert('没有更多评论了')
+  }, 500)
+}
 
 // 监听路由参数变化
-watch(() => route.params.id, (newId) => {
-  newsId.value = Number(newId) || 1;
-  getNewsDetail();
-});
+watch(
+  () => route.params.id,
+  (newId) => {
+    newsId.value = Number(newId) || 1
+    getNewsDetail()
+  },
+)
 
 // 组件挂载时获取新闻详情
 onMounted(() => {
-  getNewsDetail();
-});
+  getNewsDetail()
+})
 </script>
 
 <style scoped>
@@ -717,18 +738,18 @@ section {
 }
 
 .share-weixin:hover {
-  border-color: #07C160;
-  color: #07C160;
+  border-color: #07c160;
+  color: #07c160;
 }
 
 .share-weibo:hover {
-  border-color: #E6162D;
-  color: #E6162D;
+  border-color: #e6162d;
+  color: #e6162d;
 }
 
 .share-qq:hover {
-  border-color: #1DA1F2;
-  color: #1DA1F2;
+  border-color: #1da1f2;
+  color: #1da1f2;
 }
 
 .weixin-code {

@@ -28,7 +28,7 @@
             </p>
           </div>
           <div class="section-image">
-            <img :src="historyImg" alt="泥彩人历史" class="history-img">
+            <img :src="historyImg" alt="泥彩人历史" class="history-img" />
           </div>
         </div>
       </div>
@@ -89,42 +89,52 @@
         <h2 class="section-title">制作工艺</h2>
         <div class="craft-content">
           <div class="craft-image">
-            <img :src="craftImg" alt="泥彩人制作工艺" class="craft-img">
+            <img :src="craftImg" alt="泥彩人制作工艺" class="craft-img" />
           </div>
           <div class="craft-steps">
             <div class="craft-step">
               <div class="step-number">01</div>
               <div class="step-content">
                 <h3 class="step-title">取土炼泥</h3>
-                <p class="step-desc">选择优质的黏土，经过晾晒、粉碎、过筛、和泥、醒泥等多道工序，制成细腻柔软的泥料。</p>
+                <p class="step-desc">
+                  选择优质的黏土，经过晾晒、粉碎、过筛、和泥、醒泥等多道工序，制成细腻柔软的泥料。
+                </p>
               </div>
             </div>
             <div class="craft-step">
               <div class="step-number">02</div>
               <div class="step-content">
                 <h3 class="step-title">捏塑成型</h3>
-                <p class="step-desc">艺人根据构思，用手或简单工具将泥料捏塑成各种形象，注重整体比例和细节刻画。</p>
+                <p class="step-desc">
+                  艺人根据构思，用手或简单工具将泥料捏塑成各种形象，注重整体比例和细节刻画。
+                </p>
               </div>
             </div>
             <div class="craft-step">
               <div class="step-number">03</div>
               <div class="step-content">
                 <h3 class="step-title">晾晒打磨</h3>
-                <p class="step-desc">将成型的泥坯放在阴凉通风处自然晾干，然后用砂纸打磨光滑，去除表面的瑕疵。</p>
+                <p class="step-desc">
+                  将成型的泥坯放在阴凉通风处自然晾干，然后用砂纸打磨光滑，去除表面的瑕疵。
+                </p>
               </div>
             </div>
             <div class="craft-step">
               <div class="step-number">04</div>
               <div class="step-content">
                 <h3 class="step-title">彩绘装饰</h3>
-                <p class="step-desc">用矿物颜料进行彩绘，色彩鲜艳明快，注重线条的流畅和色彩的搭配，体现传统审美。</p>
+                <p class="step-desc">
+                  用矿物颜料进行彩绘，色彩鲜艳明快，注重线条的流畅和色彩的搭配，体现传统审美。
+                </p>
               </div>
             </div>
             <div class="craft-step">
               <div class="step-number">05</div>
               <div class="step-content">
                 <h3 class="step-title">上光保护</h3>
-                <p class="step-desc">最后在彩绘完成的作品上涂上一层清漆，起到保护和增亮的作用，使作品更加光彩夺目。</p>
+                <p class="step-desc">
+                  最后在彩绘完成的作品上涂上一层清漆，起到保护和增亮的作用，使作品更加光彩夺目。
+                </p>
               </div>
             </div>
           </div>
@@ -144,24 +154,29 @@
             </p>
             <ul class="heritage-list">
               <li class="heritage-item">
-                <strong>建立传承人制度：</strong>认定各级非遗传承人，为他们提供必要的支持和保障，鼓励他们带徒授艺。
+                <strong>建立传承人制度：</strong
+                >认定各级非遗传承人，为他们提供必要的支持和保障，鼓励他们带徒授艺。
               </li>
               <li class="heritage-item">
-                <strong>建设传承基地：</strong>建立泥彩人传承基地和展示中心，为技艺传承提供场所和平台。
+                <strong>建设传承基地：</strong
+                >建立泥彩人传承基地和展示中心，为技艺传承提供场所和平台。
               </li>
               <li class="heritage-item">
-                <strong>开展教育活动：</strong>在学校和社区开展泥彩人知识普及和技艺培训活动，培养年轻一代的兴趣和热爱。
+                <strong>开展教育活动：</strong
+                >在学校和社区开展泥彩人知识普及和技艺培训活动，培养年轻一代的兴趣和热爱。
               </li>
               <li class="heritage-item">
-                <strong>创新产品设计：</strong>结合现代生活需求，开发泥彩人文创产品，扩大泥彩人的影响力和市场。
+                <strong>创新产品设计：</strong
+                >结合现代生活需求，开发泥彩人文创产品，扩大泥彩人的影响力和市场。
               </li>
               <li class="heritage-item">
-                <strong>加强宣传推广：</strong>通过各种媒体和平台，加强泥彩人文化的宣传和推广，提高社会认知度和关注度。
+                <strong>加强宣传推广：</strong
+                >通过各种媒体和平台，加强泥彩人文化的宣传和推广，提高社会认知度和关注度。
               </li>
             </ul>
           </div>
           <div class="heritage-image">
-            <img :src="heritageImg" alt="泥彩人传承保护" class="heritage-img">
+            <img :src="heritageImg" alt="泥彩人传承保护" class="heritage-img" />
           </div>
         </div>
       </div>
@@ -209,13 +224,13 @@
 <script lang="ts" setup>
 // 定义组件名称以符合多词规范
 defineOptions({
-  name: 'AboutPage'
-});
+  name: 'AboutPage',
+})
 
 // 导入图片资源
-import historyImg from '@/assets/images/other/history.jpg';
-import craftImg from '@/assets/images/other/craft.jpg';
-import heritageImg from '@/assets/images/other/heritage.jpg';
+import historyImg from '@/assets/images/other/history.jpg'
+import craftImg from '@/assets/images/other/craft.jpg'
+import heritageImg from '@/assets/images/other/heritage.jpg'
 
 // 页面内容已在template中完整实现
 </script>
@@ -319,7 +334,9 @@ section {
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .value-card:hover {
@@ -521,14 +538,14 @@ section {
   .page-title {
     font-size: 40px;
   }
-  
+
   .section-content,
   .craft-content,
   .heritage-content {
     flex-direction: column;
     gap: 30px;
   }
-  
+
   .vision-goals {
     gap: 40px;
   }
@@ -538,23 +555,23 @@ section {
   .page-header {
     padding: 60px 0;
   }
-  
+
   .page-title {
     font-size: 32px;
   }
-  
+
   .page-subtitle {
     font-size: 18px;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
   .section-title {
     font-size: 28px;
   }
-  
+
   .vision-goals {
     flex-direction: column;
     gap: 30px;
@@ -565,15 +582,15 @@ section {
   .page-title {
     font-size: 28px;
   }
-  
+
   .page-subtitle {
     font-size: 16px;
   }
-  
+
   .section-title {
     font-size: 24px;
   }
-  
+
   .value-grid {
     grid-template-columns: 1fr;
   }

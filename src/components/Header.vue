@@ -41,33 +41,32 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 // 移除未使用的router导入
 // import { useRouter } from 'vue-router';
 
 // 定义组件名称以符合多词规范
 defineOptions({
-  name: 'AppHeader'
-});
+  name: 'AppHeader',
+})
 
 // const router = useRouter();
 
-
 // 监听滚动事件，改变header样式
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
+  window.addEventListener('scroll', handleScroll)
+})
 
 const handleScroll = () => {
-  const header = document.querySelector('.header');
+  const header = document.querySelector('.header')
   if (header) {
     if (window.scrollY > 50) {
-      header.classList.add('scrolled');
+      header.classList.add('scrolled')
     } else {
-      header.classList.remove('scrolled');
+      header.classList.remove('scrolled')
     }
   }
-};
+}
 </script>
 
 <style scoped>

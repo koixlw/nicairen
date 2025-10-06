@@ -64,9 +64,7 @@
       </div>
 
       <div class="footer-bottom">
-        <div class="copyright">
-          © 2023 泥彩人非遗文化传承中心. 保留所有权利.
-        </div>
+        <div class="copyright">© 2023 泥彩人非遗文化传承中心. 保留所有权利.</div>
         <div class="footer-nav">
           <a href="#" class="footer-nav-link">隐私政策</a>
           <span>|</span>
@@ -82,8 +80,8 @@
 <script lang="ts" setup>
 // 定义组件名称以符合多词规范
 defineOptions({
-  name: 'AppFooter'
-});
+  name: 'AppFooter',
+})
 
 // 移除未使用的router导入
 // import { useRouter } from 'vue-router';

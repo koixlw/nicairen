@@ -4,7 +4,7 @@
     <section class="banner">
       <div class="banner-slider">
         <div class="banner-item active">
-          <img :src="imageImg" alt="泥彩人非遗文化" class="banner-img">
+          <img :src="imageImg" alt="泥彩人非遗文化" class="banner-img" />
           <div class="banner-content">
             <h2 class="banner-title">传承千年技艺</h2>
             <p class="banner-subtitle">探索泥彩人非遗文化的独特魅力</p>
@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="banner-item">
-          <img :src="image1Img" alt="泥彩人作品展示" class="banner-img">
+          <img :src="image1Img" alt="泥彩人作品展示" class="banner-img" />
           <div class="banner-content">
             <h2 class="banner-title">精美作品展示</h2>
             <p class="banner-subtitle">欣赏非遗传承人的匠心之作</p>
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="banner-item">
-          <img :src="imageImg" alt="泥彩人体验活动" class="banner-img">
+          <img :src="imageImg" alt="泥彩人体验活动" class="banner-img" />
           <div class="banner-content">
             <h2 class="banner-title">体验传统工艺</h2>
             <p class="banner-subtitle">亲手制作属于自己的泥彩人</p>
@@ -53,7 +53,7 @@
             <router-link to="/about" class="about-btn">了解更多</router-link>
           </div>
           <div class="about-image">
-            <img :src="image1Img" alt="泥彩人历史" class="about-img">
+            <img :src="image1Img" alt="泥彩人历史" class="about-img" />
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         <h2 class="section-title">非遗传承人</h2>
         <div class="inheritors-grid">
           <div class="inheritor-card" v-for="inheritor in featuredInheritors" :key="inheritor.id">
-            <img :src="inheritor.image" :alt="inheritor.name" class="inheritor-img">
+            <img :src="inheritor.image" :alt="inheritor.name" class="inheritor-img" />
             <div class="inheritor-info">
               <h3 class="inheritor-name">{{ inheritor.name }}</h3>
               <p class="inheritor-title">{{ inheritor.title }}</p>
@@ -86,7 +86,7 @@
         <h2 class="section-title">精选作品</h2>
         <div class="gallery-grid">
           <div class="gallery-item" v-for="work in featuredWorks" :key="work.id">
-            <img :src="work.image" :alt="work.title" class="gallery-img">
+            <img :src="work.image" :alt="work.title" class="gallery-img" />
             <div class="gallery-overlay">
               <h3 class="gallery-title">{{ work.title }}</h3>
               <p class="gallery-artist">传承人：{{ work.artist }}</p>
@@ -106,7 +106,7 @@
         <div class="news-list">
           <div class="news-item" v-for="news in latestNews" :key="news.id">
             <div class="news-image">
-              <img :src="news.image" :alt="news.title" class="news-img">
+              <img :src="news.image" :alt="news.title" class="news-img" />
             </div>
             <div class="news-content">
               <span class="news-date">{{ news.date }}</span>
@@ -141,7 +141,7 @@
             <router-link to="/reserve" class="reserve-btn">立即预约</router-link>
           </div>
           <div class="reserve-image">
-            <img :src="imageImg" alt="泥彩人体验活动" class="reserve-img">
+            <img :src="imageImg" alt="泥彩人体验活动" class="reserve-img" />
           </div>
         </div>
       </div>
@@ -153,7 +153,7 @@
         <h2 class="section-title">商城精选</h2>
         <div class="shop-grid">
           <div class="shop-item" v-for="product in featuredProducts" :key="product.id">
-            <img :src="product.image" :alt="product.name" class="shop-img">
+            <img :src="product.image" :alt="product.name" class="shop-img" />
             <h3 class="shop-name">{{ product.name }}</h3>
             <p class="shop-price">¥{{ product.price }}</p>
             <button class="shop-btn">加入购物车</button>
@@ -170,19 +170,18 @@
 <script lang="ts" setup>
 // 定义组件名称以符合多词规范
 defineOptions({
-  name: 'HomePage'
-});
+  name: 'HomePage',
+})
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
 
 // 图片导入
-import imageImg from '@/assets/images/image.png';
-import image1Img from '@/assets/images/image1.png';
+import imageImg from '@/assets/images/image.png'
+import image1Img from '@/assets/images/image1.png'
 
 // 轮播图相关
-const activeSlide = ref(0);
-//@ts-ignore
-const slideInterval = ref<NodeJS.Timeout | null>(null);
+const activeSlide = ref(0)
+const slideInterval = ref<ReturnType<typeof setInterval> | null>(null)
 
 // 模拟数据 - 特色传承人
 const featuredInheritors = ref([
@@ -191,23 +190,23 @@ const featuredInheritors = ref([
     name: '张明山',
     title: '国家级非遗传承人',
     description: '从事泥彩人制作40余年，作品曾多次获得国家级奖项',
-    image: imageImg
+    image: imageImg,
   },
   {
     id: 2,
     name: '李巧云',
     title: '省级非遗传承人',
     description: '擅长传统人物题材，作品风格细腻生动',
-    image: image1Img
+    image: image1Img,
   },
   {
     id: 3,
     name: '王建国',
     title: '市级非遗传承人',
     description: '专注创新泥彩人技艺，融合现代元素',
-    image: imageImg
-  }
-]);
+    image: imageImg,
+  },
+])
 
 // 模拟数据 - 精选作品
 const featuredWorks = ref([
@@ -215,52 +214,54 @@ const featuredWorks = ref([
     id: 1,
     title: '吉祥如意',
     artist: '张明山',
-    image: imageImg
+    image: imageImg,
   },
   {
     id: 2,
     title: '年年有余',
     artist: '李巧云',
-    image: image1Img
+    image: image1Img,
   },
   {
     id: 3,
     title: '福娃迎春',
     artist: '王建国',
-    image: imageImg
+    image: imageImg,
   },
   {
     id: 4,
     title: '松鹤延年',
     artist: '张明山',
-    image: image1Img
-  }
-]);
+    image: image1Img,
+  },
+])
 
 // 模拟数据 - 最新新闻
 const latestNews = ref([
   {
     id: 1,
     title: '泥彩人技艺入选国家级非物质文化遗产名录',
-    excerpt: '近日，国务院公布了第五批国家级非物质文化遗产代表性项目名录，我市的泥彩人技艺成功入选...',
+    excerpt:
+      '近日，国务院公布了第五批国家级非物质文化遗产代表性项目名录，我市的泥彩人技艺成功入选...',
     date: '2023-10-15',
-    image: image1Img
+    image: image1Img,
   },
   {
     id: 2,
     title: '2023年泥彩人文化艺术节盛大开幕',
-    excerpt: '为期一周的泥彩人文化艺术节在惠山古镇拉开帷幕，吸引了来自全国各地的游客和艺术爱好者...',
+    excerpt:
+      '为期一周的泥彩人文化艺术节在惠山古镇拉开帷幕，吸引了来自全国各地的游客和艺术爱好者...',
     date: '2023-09-28',
-    image: imageImg
+    image: imageImg,
   },
   {
     id: 3,
     title: '青年传承人马小明获"非遗新秀"称号',
     excerpt: '我市青年泥彩人传承人马小明在全国非遗技艺大赛中脱颖而出，获得"非遗新秀"荣誉称号...',
     date: '2023-09-10',
-    image: image1Img
-  }
-]);
+    image: image1Img,
+  },
+])
 
 // 模拟数据 - 商城精选
 const featuredProducts = ref([
@@ -268,60 +269,60 @@ const featuredProducts = ref([
     id: 1,
     name: '传统泥彩人摆件 - 福禄寿',
     price: 298,
-    image: imageImg
+    image: imageImg,
   },
   {
     id: 2,
     name: '泥彩人DIY套装',
     price: 198,
-    image: image1Img
+    image: image1Img,
   },
   {
     id: 3,
     name: '泥彩人文创笔记本',
     price: 68,
-    image: imageImg
+    image: imageImg,
   },
   {
     id: 4,
     name: '泥彩人主题T恤',
     price: 128,
-    image: image1Img
-  }
-]);
+    image: image1Img,
+  },
+])
 
 // 设置轮播图
 const setActiveSlide = (index: number) => {
-  activeSlide.value = index;
-  updateSlideIndicators();
-};
+  activeSlide.value = index
+  updateSlideIndicators()
+}
 
 // 更新轮播指示器
 const updateSlideIndicators = () => {
-  const indicators = document.querySelectorAll('.banner-indicators .indicator');
+  const indicators = document.querySelectorAll('.banner-indicators .indicator')
   indicators.forEach((indicator, index) => {
     if (index === activeSlide.value) {
-      indicator.classList.add('active');
+      indicator.classList.add('active')
     } else {
-      indicator.classList.remove('active');
+      indicator.classList.remove('active')
     }
-  });
-};
+  })
+}
 
 // 下一张轮播图
 const nextSlide = () => {
-  activeSlide.value = (activeSlide.value + 1) % 3;
-  updateSlideIndicators();
-};
+  activeSlide.value = (activeSlide.value + 1) % 3
+  updateSlideIndicators()
+}
 
 // 组件挂载后启动轮播
 onMounted(() => {
   // 启动自动轮播
-  slideInterval.value = setInterval(nextSlide, 5000);
-  
+  slideInterval.value = setInterval(nextSlide, 5000)
+
   // 更新初始状态
-  updateSlideIndicators();
-});
+  updateSlideIndicators()
+})
 </script>
 
 <style scoped>
@@ -534,7 +535,9 @@ onMounted(() => {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .inheritor-card:hover {
@@ -797,7 +800,9 @@ onMounted(() => {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .shop-item:hover {
@@ -848,26 +853,26 @@ onMounted(() => {
   .banner-title {
     font-size: 40px;
   }
-  
+
   .banner-subtitle {
     font-size: 20px;
   }
-  
+
   .about-content,
   .reserve-content {
     flex-direction: column;
     gap: 30px;
   }
-  
+
   .news-item {
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .news-image {
     flex: 0 0 auto;
   }
-  
+
   .news-img {
     height: 200px;
   }
@@ -877,23 +882,23 @@ onMounted(() => {
   .banner {
     height: 400px;
   }
-  
+
   .banner-title {
     font-size: 28px;
   }
-  
+
   .banner-subtitle {
     font-size: 18px;
   }
-  
+
   .banner-content {
     left: 5%;
   }
-  
+
   .section-title {
     font-size: 28px;
   }
-  
+
   .about-section,
   .inheritors-section,
   .gallery-section,
@@ -902,7 +907,7 @@ onMounted(() => {
   .shop-section {
     padding: 60px 0;
   }
-  
+
   .reserve-title {
     font-size: 28px;
   }
@@ -912,20 +917,20 @@ onMounted(() => {
   .banner {
     height: 300px;
   }
-  
+
   .banner-title {
     font-size: 24px;
   }
-  
+
   .banner-subtitle {
     font-size: 16px;
   }
-  
+
   .banner-btn {
     padding: 10px 20px;
     font-size: 14px;
   }
-  
+
   .inheritors-grid,
   .gallery-grid,
   .shop-grid {
