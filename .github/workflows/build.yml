@@ -17,10 +17,20 @@ jobs:
           cache: 'pnpm'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup-pnpm@v3  # ✅ 正确的仓库名
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Build project
         run: pnpm build
+
+      - name: 部署
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: dist # The folder the action should deploy.
+          clean: true
+        
